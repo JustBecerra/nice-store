@@ -35,7 +35,17 @@ export default function Home() {
     <ThemeProvider theme={theme}>
       <main>
         <NavBar />
-        <Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexWrap: "wrap",
+            width: "100vw",
+            gap: "2rem",
+            marginTop: "1.5rem",
+          }}
+        >
           {products.map((item) => (
             <Product
               key={item.id}
