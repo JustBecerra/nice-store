@@ -1,3 +1,4 @@
+"use client";
 import { createTheme } from "@mui/material/styles";
 declare module "@mui/material/styles" {
   interface Theme {
@@ -15,7 +16,7 @@ declare module "@mui/material/styles" {
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "fffff",
+      main: "#ffff",
     },
   },
 });
