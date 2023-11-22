@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Provider } from "react-redux";
-import { store } from "../../utils/store";
+import { ReduxProvider } from "@/redux/provider";
+import { MUIThemeProvider } from "../../utils/provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +18,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Provider store={store}>
-        <body className={inter.className}>{children}</body>
-      </Provider>
+      <body className={inter.className}>
+        <ReduxProvider>
+          <MUIThemeProvider>{children}</MUIThemeProvider>
+        </ReduxProvider>
+      </body>
     </html>
   );
 }

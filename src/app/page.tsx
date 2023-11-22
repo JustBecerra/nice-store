@@ -1,61 +1,35 @@
-import { Box, ThemeProvider } from "@mui/material";
-import { theme } from "../../utils/theme";
+"use client";
+import { Box } from "@mui/material";
 import { NavBar } from "@/components/NavBar";
 import { Product } from "@/components/Product";
-
-const products = [
-  {
-    id: 1,
-    title: "title1",
-    price: 109,
-    description: "descriptionasdasd",
-  },
-  {
-    id: 2,
-    title: "title2",
-    price: 52,
-    description: "descriptionasdasd",
-  },
-  {
-    id: 3,
-    title: "title3",
-    price: 11,
-    description: "descriptionasdasd",
-  },
-  {
-    id: 4,
-    title: "title4",
-    price: 32,
-    description: "descriptionasdasd",
-  },
-];
+import { useAppSelector } from "@/redux/store";
 
 export default function Home() {
+  const products = useAppSelector((state) => state.productReducer.value);
+  console.log("products", products);
   return (
-    <ThemeProvider theme={theme}>
-      <main>
-        <NavBar />
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexWrap: "wrap",
-            width: "100vw",
-            gap: "2rem",
-            marginTop: "1.5rem",
-          }}
-        >
-          {products.map((item) => (
-            <Product
-              key={item.id}
-              title={item.title}
-              description={item.description}
-              price={item.price}
-            />
-          ))}
-        </Box>
-      </main>
-    </ThemeProvider>
+    <main>
+      <NavBar />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexWrap: "wrap",
+          width: "100vw",
+          gap: "2rem",
+          marginTop: "1.5rem",
+        }}
+      >
+        {products.map((item) => (
+          <Product
+            key={item.id}
+            title={item.title}
+            description={item.description}
+            price={item.price}
+          />
+        ))}
+      </Box>
+    </main>
   );
 }
