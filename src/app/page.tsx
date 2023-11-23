@@ -10,10 +10,10 @@ import { fetchProducts } from "@/redux/features/product-slice";
 export default function Home() {
   const products = useAppSelector((state) => state.productReducer.products);
   const dispatch = useDispatch<AppDispatch>();
+  console.log("products", products);
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
-  console.log("products", products);
   return (
     <main>
       <NavBar />
@@ -22,19 +22,15 @@ export default function Home() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          flexWrap: "wrap",
+          // flexWrap: "wrap",
+          flexDirection: "column",
           width: "100vw",
           gap: "2rem",
           marginTop: "1.5rem",
         }}
       >
         {products.map((item) => (
-          <Product
-            key={item.id}
-            title={item.title}
-            description={item.description}
-            price={item.price}
-          />
+          <Product key={item.id} item={item} />
         ))}
       </Box>
     </main>

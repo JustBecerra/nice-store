@@ -1,26 +1,45 @@
 "use client";
+import { ProductType } from "@/redux/features/types";
 import { Box, Typography, useTheme } from "@mui/material";
+import Image from "next/image";
 
 interface props {
-  title: string;
-  description: string;
-  price: number;
+  item: ProductType;
 }
 
-export const Product = ({ title, description, price }: props) => {
+export const Product = ({ item }: props) => {
+  const { title, description, price, category, image, rating } = item;
   const theme = useTheme();
   return (
     <Box
       sx={{
-        width: "40%",
+        display: "flex",
+        flexDirection: "column",
+        width: "75%",
         backgroundColor: theme.palette.primary.main,
         borderRadius: "0.75rem",
         p: "0.5rem",
+        gap: "0.5rem",
       }}
     >
-      <Typography>{title}</Typography>
-      <Typography>{description}</Typography>
-      <Typography>{price}</Typography>
+      <Box
+        sx={{
+          width: "100%",
+          height: "30%",
+        }}
+      >
+        <Image
+          src={image}
+          width={200}
+          height={200}
+          layout="responsive"
+          alt={""}
+        />
+      </Box>
+      <Typography sx={{ fontSize: "1.5rem" }}>{title}</Typography>
+      <Typography sx={{ fontSize: "1.25rem" }}>category: {category}</Typography>
+      <Typography sx={{ fontSize: "1.25rem" }}>${price}</Typography>
+      <Typography sx={{ fontSize: "1rem" }}>{description}.</Typography>
     </Box>
   );
 };
