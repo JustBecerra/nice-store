@@ -36,10 +36,18 @@ export const Product = ({ item }: props) => {
           alt={""}
         />
       </Box>
-      <Typography sx={{ fontSize: "1.5rem" }}>{title}</Typography>
-      <Typography sx={{ fontSize: "1.25rem" }}>category: {category}</Typography>
-      <Typography sx={{ fontSize: "1.25rem" }}>${price}</Typography>
-      <Typography sx={{ fontSize: "1rem" }}>{description}.</Typography>
+      <Typography sx={{ fontSize: "1.5rem", color: "white" }}>
+        {title}
+      </Typography>
+      <Typography sx={{ fontSize: "1.25rem", color: "white" }}>
+        category: {category}
+      </Typography>
+      <Typography sx={{ fontSize: "1.25rem", color: "white" }}>
+        ${price}
+      </Typography>
+      <Typography sx={{ fontSize: "1rem", color: "white" }}>
+        {description}.
+      </Typography>
     </Box>
   );
 };
