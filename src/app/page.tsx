@@ -2,10 +2,17 @@
 import { Box } from "@mui/material";
 import { NavBar } from "@/components/NavBar";
 import { Product } from "@/components/Product";
-import { useAppSelector } from "@/redux/store";
+import { AppDispatch, useAppSelector } from "@/redux/store";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchProducts } from "@/redux/features/product-slice";
 
 export default function Home() {
-  const products = useAppSelector((state) => state.productReducer.value);
+  const products = useAppSelector((state) => state.productReducer.products);
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
   console.log("products", products);
   return (
     <main>
