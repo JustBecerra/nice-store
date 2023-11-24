@@ -8,7 +8,7 @@ interface props {
 }
 
 export const Product = ({ item }: props) => {
-  const { title, description, price, category, image, rating } = item;
+  const { title, description, price, category, image } = item;
   const theme = useTheme();
   return (
     <Box
