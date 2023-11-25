@@ -8,7 +8,7 @@ export const NavBar = () => {
         sx={{
           display: "flex",
           flexDirection: "row",
-          gap: "0.5rem",
+          gap: "1.25rem",
           justifyContent: "flex-end",
           width: "auto",
         }}
