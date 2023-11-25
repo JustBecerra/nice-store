@@ -22,7 +22,7 @@ export const ProductsList = () => {
         flexDirection: "column",
         width: "100vw",
         gap: "2rem",
-        marginTop: "1.5rem",
+        marginY: "1.5rem",
       }}
     >
       {products.map((item) => (

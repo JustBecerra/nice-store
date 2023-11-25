@@ -45,7 +45,15 @@ export const Product = ({ item }: props) => {
       <Typography sx={{ fontSize: "1.25rem", color: "white" }}>
         ${price}
       </Typography>
-      <Typography sx={{ fontSize: "1rem", color: "white" }}>
+      <Typography
+        sx={{
+          fontSize: "1rem",
+          color: "white",
+          maxHeight: "4.75em",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+        }}
+      >
         {description}.
       </Typography>
     </Box>
