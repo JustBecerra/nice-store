@@ -2,13 +2,15 @@
 import { ProductType } from "@/redux/features/types";
 import { Box, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
+import React from "react";
+import { ProductDetail } from "../ProductDetail";
 
 interface props {
   item: ProductType;
 }
 
 export const Product = ({ item }: props) => {
-  const { title, description, price, category, image } = item;
+  const { title, price, image } = item;
   const theme = useTheme();
   return (
     <Box
@@ -40,21 +42,7 @@ export const Product = ({ item }: props) => {
         {title}
       </Typography>
       <Typography sx={{ fontSize: "1.25rem", color: "white" }}>
-        category: {category}
-      </Typography>
-      <Typography sx={{ fontSize: "1.25rem", color: "white" }}>
         ${price}
-      </Typography>
-      <Typography
-        sx={{
-          fontSize: "1rem",
-          color: "white",
-          maxHeight: "4.75em",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-        }}
-      >
-        {description}.
       </Typography>
     </Box>
   );

@@ -18,7 +18,6 @@ export const ProductsList = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        // flexWrap: "wrap",
         flexDirection: "column",
         width: "100vw",
         gap: "2rem",
