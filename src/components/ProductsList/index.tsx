@@ -25,7 +25,13 @@ export const ProductsList = () => {
       }}
     >
       {products.map((item) => (
-        <Product key={item.id} item={item} />
+        <Product
+          key={item.id}
+          title={item.title}
+          price={item.price}
+          id={item.id}
+          image={item.image}
+        />
       ))}
     </Box>
   );

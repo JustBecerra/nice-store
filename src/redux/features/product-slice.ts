@@ -1,15 +1,28 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { Product } from "./types";
+import { ProductType } from "./types";
 
 type initialStateType = {
-  products: Product[];
+  products: ProductType[];
+  productDetail: ProductType;
   status: string;
   error: string;
 };
 
 const initialState: initialStateType = {
   products: [],
+  productDetail: {
+    category: "",
+    description: "",
+    id: 0,
+    image: "",
+    price: 0,
+    rating: {
+      count: 0,
+      rate: 0,
+    },
+    title: "",
+  },
   status: "",
   error: "",
 } as initialStateType;
@@ -19,11 +32,16 @@ const fetchProducts = createAsyncThunk("products", async () => {
   return response.data;
 });
 
-export const product = createSlice({
-  name: "products",
+const fetchProduct = createAsyncThunk("product", async (id: number) => {
+  const response = await axios.get(`https://fakestoreapi.com/products/${id}`);
+  return response.data;
+});
+
+export const products = createSlice({
+  name: "product",
   initialState,
   reducers: {
-    addProducts: (state, action: PayloadAction<Product[]>) => {
+    addProducts: (state, action: PayloadAction<ProductType[]>) => {
       state.products = action.payload;
     },
   },
@@ -39,10 +57,21 @@ export const product = createSlice({
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message as string;
+      })
+      .addCase(fetchProduct.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchProduct.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.productDetail = action.payload;
+      })
+      .addCase(fetchProduct.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message as string;
       });
   },
 });
 
-export { fetchProducts };
-export const { addProducts } = product.actions;
-export default product.reducer;
+export { fetchProducts, fetchProduct };
+export const { addProducts } = products.actions;
+export default products.reducer;
