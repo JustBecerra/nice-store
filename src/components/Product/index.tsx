@@ -26,7 +26,7 @@ export const Product = ({ title, price, image, id }: props) => {
         gap: "0.5rem",
       }}
     >
-      <Link href={`/${id}`}>
+      <Link href={`product/${id}`}>
         <Box
           sx={{
             width: "100%",
