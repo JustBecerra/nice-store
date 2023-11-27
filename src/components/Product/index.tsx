@@ -15,18 +15,18 @@ interface props {
 export const Product = ({ title, price, image, id }: props) => {
   const theme = useTheme();
   return (
-    <Link href={`/${id}`}>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          width: "75%",
-          backgroundColor: theme.palette.primary.main,
-          borderRadius: "0.75rem",
-          p: "0.5rem",
-          gap: "0.5rem",
-        }}
-      >
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        width: "75%",
+        backgroundColor: theme.palette.primary.main,
+        borderRadius: "0.75rem",
+        p: "0.5rem",
+        gap: "0.5rem",
+      }}
+    >
+      <Link href={`/${id}`}>
         <Box
           sx={{
             width: "100%",
@@ -47,7 +47,7 @@ export const Product = ({ title, price, image, id }: props) => {
         <Typography sx={{ fontSize: "1.25rem", color: "white" }}>
           ${price}
         </Typography>
-      </Box>
-    </Link>
+      </Link>
+    </Box>
   );
 };
