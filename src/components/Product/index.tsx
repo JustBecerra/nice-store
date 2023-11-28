@@ -41,10 +41,14 @@ export const Product = ({ title, price, image, id }: props) => {
             alt={""}
           />
         </Box>
-        <Typography sx={{ fontSize: "1.5rem", color: "white" }}>
+        <Typography
+          sx={{ fontSize: "1.5rem", color: `${theme.palette.primary.light}` }}
+        >
           {title}
         </Typography>
-        <Typography sx={{ fontSize: "1.25rem", color: "white" }}>
+        <Typography
+          sx={{ fontSize: "1.25rem", color: `${theme.palette.primary.light}` }}
+        >
           ${price}
         </Typography>
       </Link>
