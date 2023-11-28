@@ -1,13 +1,17 @@
+"use client";
 import { ProductType } from "@/redux/features/types";
 import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import Image from "next/image";
 import { theme } from "../../../utils/theme";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useRouter } from "next/navigation";
 
 interface props {
   item: ProductType;
 }
 export const ProductDetail = ({ item }: props) => {
+  const router = useRouter();
   const { title, price, image, description, category } = item;
   return (
     <Box
@@ -19,16 +23,23 @@ export const ProductDetail = ({ item }: props) => {
         p: "0.5rem",
         gap: "0.5rem",
         overflow: "scroll",
-        justifyContent: "space-around",
+        justifyContent: "space-between",
       }}
     >
-      <Image
-        src={image}
-        width={400}
-        height={300}
-        layout="responsive"
-        alt={""}
-      />
+      <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
+        <Button onClick={() => router.back()}>
+          <ArrowBackIcon sx={{ color: `${theme.palette.primary.light}` }} />
+        </Button>
+      </Box>
+      <Box>
+        <Image
+          src={image}
+          width={400}
+          height={300}
+          layout="responsive"
+          alt={""}
+        />
+      </Box>
       <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
         <Typography
           sx={{ fontSize: "1.5rem", color: `${theme.palette.primary.light}` }}
@@ -37,7 +48,10 @@ export const ProductDetail = ({ item }: props) => {
         </Typography>
 
         <Typography
-          sx={{ fontSize: "1.25rem", color: `${theme.palette.primary.light}` }}
+          sx={{
+            fontSize: "1.25rem",
+            color: `${theme.palette.primary.light}`,
+          }}
         >
           Category: {category}
         </Typography>
