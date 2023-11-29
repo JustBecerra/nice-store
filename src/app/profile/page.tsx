@@ -1,12 +1,11 @@
 "use client";
 import { Box } from "@mui/material";
-import { useRouter } from "next/navigation";
 import { theme } from "../../../utils/theme";
 import { BackArrow } from "@/components/BackArrow";
+import { ProfileForms } from "@/components/ProfileForms";
 const Profile = () => {
-  const router = useRouter();
   return (
-    <Box>
+    <Box sx={{ height: "100vh", backgroundColor: theme.palette.primary.light }}>
       <Box
         sx={{
           display: "flex",
@@ -18,6 +17,7 @@ const Profile = () => {
       >
         <BackArrow />
       </Box>
+      <ProfileForms />
     </Box>
   );
 };
