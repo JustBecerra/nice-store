@@ -26,23 +26,31 @@ export const ProfileForms = () => {
       >
         <Button
           sx={{
-            border: `1px solid ${theme.palette.primary.main}`,
+            backgroundColor: theme.palette.warning.main,
             borderRadius: "0.75rem",
             px: "1rem",
             py: "0.75rem",
           }}
         >
-          <Typography sx={{ textTransform: "none" }}>Clear</Typography>
+          <Typography
+            sx={{ textTransform: "none", color: theme.palette.primary.light }}
+          >
+            Clear
+          </Typography>
         </Button>
         <Button
           sx={{
-            border: `1px solid ${theme.palette.primary.main}`,
+            backgroundColor: theme.palette.success.main,
             borderRadius: "0.75rem",
             px: "1rem",
             py: "0.75rem",
           }}
         >
-          <Typography sx={{ textTransform: "none" }}>Update</Typography>
+          <Typography
+            sx={{ textTransform: "none", color: theme.palette.primary.light }}
+          >
+            Update
+          </Typography>
         </Button>
       </Box>
     </Box>
