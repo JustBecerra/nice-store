@@ -76,6 +76,8 @@ export const ProductDetail = ({ item }: props) => {
             sx={{
               border: `1px solid ${theme.palette.primary.light}`,
               borderRadius: "0.75rem",
+              mb: "1rem",
+              mr: "0.5rem",
             }}
           >
             <Typography

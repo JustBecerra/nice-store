@@ -28,6 +28,8 @@ export const ProfileForms = () => {
           sx={{
             border: `1px solid ${theme.palette.primary.main}`,
             borderRadius: "0.75rem",
+            px: "1rem",
+            py: "0.75rem",
           }}
         >
           <Typography sx={{ textTransform: "none" }}>Clear</Typography>
@@ -36,6 +38,8 @@ export const ProfileForms = () => {
           sx={{
             border: `1px solid ${theme.palette.primary.main}`,
             borderRadius: "0.75rem",
+            px: "1rem",
+            py: "0.75rem",
           }}
         >
           <Typography sx={{ textTransform: "none" }}>Update</Typography>
