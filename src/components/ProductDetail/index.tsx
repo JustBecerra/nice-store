@@ -4,8 +4,8 @@ import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import Image from "next/image";
 import { theme } from "../../../utils/theme";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useRouter } from "next/navigation";
+import { BackArrow } from "../BackArrow";
 
 interface props {
   item: ProductType;
@@ -27,9 +27,7 @@ export const ProductDetail = ({ item }: props) => {
       }}
     >
       <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
-        <Button onClick={() => router.back()}>
-          <ArrowBackIcon sx={{ color: `${theme.palette.primary.light}` }} />
-        </Button>
+        <BackArrow />
       </Box>
       <Box>
         <Image
