@@ -1,6 +1,7 @@
 import { Avatar, Box, Button, TextField, Typography } from "@mui/material";
 import { theme } from "../../../utils/theme";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 export const ProfileForms = () => {
   return (
     <Box
@@ -13,9 +14,21 @@ export const ProfileForms = () => {
       }}
       component="form"
     >
-      <Avatar sx={{ mt: "2rem", height: "6rem", width: "6rem" }}>
-        <AccountBoxIcon sx={{ height: "3rem", width: "3rem" }} />
-      </Avatar>
+      <Box sx={{ position: "relative" }}>
+        <Avatar sx={{ mt: "2rem", height: "6rem", width: "6rem" }}>
+          <AccountBoxIcon sx={{ height: "3rem", width: "3rem" }} />
+        </Avatar>
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: -15,
+            right: 0,
+          }}
+        >
+          <AddCircleIcon sx={{ height: "3rem", width: "3rem" }} />
+        </Box>
+      </Box>
+
       <TextField label="First name" sx={{ mt: "1rem" }} />
       <TextField label="Last name" />
       <TextField label="Username" />
