@@ -19,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        {/* <SessionProvider session={pageProps.pageProps}> */}
         <ReduxProvider>
           <MUIThemeProvider>{children}</MUIThemeProvider>
         </ReduxProvider>
+        {/* </SessionProvider> */}
       </body>
     </html>
   );

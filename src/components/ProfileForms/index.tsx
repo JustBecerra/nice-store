@@ -2,6 +2,7 @@ import { Avatar, Box, Button, TextField, Typography } from "@mui/material";
 import { theme } from "../../../utils/theme";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { ProfileActions } from "../ProfileActions";
 export const ProfileForms = () => {
   return (
     <Box
@@ -34,38 +35,7 @@ export const ProfileForms = () => {
       <TextField label="Username" />
       <TextField label="Email" />
       <TextField label="Address" sx={{ mb: "1rem" }} />
-      <Box
-        sx={{ display: "flex", width: "50%", justifyContent: "space-between" }}
-      >
-        <Button
-          sx={{
-            backgroundColor: theme.palette.warning.main,
-            borderRadius: "0.75rem",
-            px: "1rem",
-            py: "0.75rem",
-          }}
-        >
-          <Typography
-            sx={{ textTransform: "none", color: theme.palette.primary.light }}
-          >
-            Clear
-          </Typography>
-        </Button>
-        <Button
-          sx={{
-            backgroundColor: theme.palette.success.main,
-            borderRadius: "0.75rem",
-            px: "1rem",
-            py: "0.75rem",
-          }}
-        >
-          <Typography
-            sx={{ textTransform: "none", color: theme.palette.primary.light }}
-          >
-            Update
-          </Typography>
-        </Button>
-      </Box>
+      <ProfileActions />
     </Box>
   );
 };
