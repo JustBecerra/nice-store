@@ -11,7 +11,7 @@ const Profile = () => {
           sx={{
             display: "flex",
             justifyContent: "flex-start",
-            backgroundColor: theme.palette.primary.main,
+            backgroundColor: theme.palette.background.default,
             pb: "0.5rem",
             pl: 0,
             alignItems: "center",

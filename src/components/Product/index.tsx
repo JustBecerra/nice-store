@@ -20,7 +20,7 @@ export const Product = ({ title, price, image, id }: props) => {
         display: "flex",
         flexDirection: "column",
         width: "75%",
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: theme.palette.background.default,
         borderRadius: "0.75rem",
         p: "0.5rem",
         gap: "0.5rem",

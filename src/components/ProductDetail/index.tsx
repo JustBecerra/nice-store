@@ -14,7 +14,7 @@ export const ProductDetail = ({ item }: props) => {
   return (
     <Box
       sx={{
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: theme.palette.background.default,
         display: "flex",
         flexDirection: "column",
         height: "100vh",
@@ -29,7 +29,7 @@ export const ProductDetail = ({ item }: props) => {
           sx={{
             display: "flex",
             justifyContent: "flex-start",
-            backgroundColor: theme.palette.primary.main,
+            backgroundColor: theme.palette.background.default,
             alignItems: "center",
             pl: 0,
           }}

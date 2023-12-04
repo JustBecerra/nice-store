@@ -8,13 +8,21 @@ import {
   Typography,
 } from "@mui/material";
 import Link from "next/link";
+import { theme } from "../../../utils/theme";
 
 export const AuthenticationCard = () => {
   const registerStatus = true;
   return (
-    <Card variant="outlined">
+    <Card
+      variant="outlined"
+      sx={{ backgroundColor: theme.palette.background.default }}
+    >
       <CardHeader>
-        <Typography>{registerStatus ? "Register" : "Sign In"}</Typography>
+        <Typography
+          sx={{ textTransform: "none", color: theme.palette.primary.light }}
+        >
+          {registerStatus ? "Register" : "Sign In"}
+        </Typography>
       </CardHeader>
       <CardContent>
         <TextField label="Email" />
