@@ -1,17 +1,15 @@
 "use client";
 import { ProductType } from "@/redux/features/types";
-import { Box, Button, Typography } from "@mui/material";
+import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 import React from "react";
 import Image from "next/image";
 import { theme } from "../../../utils/theme";
-import { useRouter } from "next/navigation";
 import { BackArrow } from "../BackArrow";
 
 interface props {
   item: ProductType;
 }
 export const ProductDetail = ({ item }: props) => {
-  const router = useRouter();
   const { title, price, image, description, category } = item;
   return (
     <Box
@@ -26,9 +24,19 @@ export const ProductDetail = ({ item }: props) => {
         justifyContent: "space-between",
       }}
     >
-      <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
-        <BackArrow />
-      </Box>
+      <AppBar position="static">
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "flex-start",
+            backgroundColor: theme.palette.primary.main,
+            alignItems: "center",
+            pl: 0,
+          }}
+        >
+          <BackArrow />
+        </Toolbar>
+      </AppBar>
       <Box>
         <Image
           src={image}

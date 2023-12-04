@@ -8,6 +8,10 @@ const Authentication = () => {
     <Box
       sx={{
         backgroundColor: theme.palette.primary.light,
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       <AuthenticationCard />

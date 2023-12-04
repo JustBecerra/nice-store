@@ -25,17 +25,29 @@ export const NavBar = () => {
           </>
         ) : (
           <>
-            <Button>
-              <Typography
-                sx={{
-                  textTransform: "none",
-                  color: theme.palette.primary.light,
-                }}
-              >
-                Log In
-              </Typography>
-            </Button>
-            <Link href={"authentication"}>
+            <Link
+              href={{
+                pathname: "/authentication",
+                query: { name: "signin" },
+              }}
+            >
+              <Button>
+                <Typography
+                  sx={{
+                    textTransform: "none",
+                    color: theme.palette.primary.light,
+                  }}
+                >
+                  Sign In
+                </Typography>
+              </Button>
+            </Link>
+            <Link
+              href={{
+                pathname: "/authentication",
+                query: { name: "register" },
+              }}
+            >
               <Button>
                 <Typography
                   sx={{

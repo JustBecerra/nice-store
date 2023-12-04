@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 export const BackArrow = () => {
   const router = useRouter();
   return (
-    <Button sx={{ mt: "0.5rem" }} onClick={() => router.back()}>
+    <Button sx={{ mt: "0.5rem", pl: "0" }} onClick={() => router.back()}>
       <ArrowBackIcon sx={{ color: `${theme.palette.primary.light}` }} />
     </Button>
   );
