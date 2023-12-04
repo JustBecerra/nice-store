@@ -45,7 +45,7 @@ export const NavBar = () => {
             <Link
               href={{
                 pathname: "/authentication",
-                query: { name: "register" },
+                query: { name: "signup" },
               }}
             >
               <Button>

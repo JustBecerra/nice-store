@@ -15,36 +15,96 @@ export const AuthenticationCard = () => {
   return (
     <Card
       variant="outlined"
-      sx={{ backgroundColor: theme.palette.background.default }}
+      sx={{
+        backgroundColor: theme.palette.background.default,
+        width: "90%",
+        borderRadius: "0.75rem",
+      }}
     >
-      <CardHeader>
+      <CardContent
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          gap: "1.5rem",
+        }}
+      >
         <Typography
           sx={{ textTransform: "none", color: theme.palette.primary.light }}
         >
-          {registerStatus ? "Register" : "Sign In"}
+          {registerStatus ? "Sign Up to Nice Store" : "Sign In to Nice Store"}
         </Typography>
-      </CardHeader>
-      <CardContent>
-        <TextField label="Email" />
-        <TextField label="Password" />
-        {registerStatus && <TextField label="Confirm Password" />}
+
+        <TextField
+          label="Email"
+          sx={{
+            "& .MuiInputLabel-root": {
+              color: theme.palette.primary.light,
+            },
+            "& .MuiInput-root": {
+              color: theme.palette.primary.light,
+            },
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: theme.palette.primary.light,
+            },
+          }}
+        />
+        <TextField
+          label="Password"
+          sx={{
+            "& .MuiInputLabel-root": {
+              color: theme.palette.primary.light,
+            },
+            "& .MuiInput-root": {
+              color: theme.palette.primary.light,
+            },
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: theme.palette.primary.light,
+            },
+          }}
+        />
+        {registerStatus && (
+          <TextField
+            label="Confirm Password"
+            sx={{
+              "& .MuiInputLabel-root": {
+                color: theme.palette.primary.light,
+              },
+              "& .MuiInput-root": {
+                color: theme.palette.primary.light,
+              },
+              "& .MuiOutlinedInput-notchedOutline": {
+                borderColor: theme.palette.primary.light,
+              },
+              "& .MuiFilledInput": {
+                color: theme.palette.primary.light,
+              },
+            }}
+          />
+        )}
       </CardContent>
       <CardActions sx={{ display: "flex", flexDirection: "column" }}>
         <Button sx={{ width: "auto" }}>
           <Typography sx={{ textTransform: "none" }}>
-            {registerStatus ? "Register" : "Sign In"}
+            {registerStatus ? "Sign Up" : "Sign In"}
           </Typography>
         </Button>
         <Link
           href={{
             pathname: "/authentication",
-            query: { name: registerStatus ? "register" : "signin" },
+            query: { name: registerStatus ? "signup" : "signin" },
           }}
         >
-          <Typography sx={{ textTransform: "none" }}>
+          <Typography
+            sx={{
+              textTransform: "none",
+              color: theme.palette.background.default,
+            }}
+          >
             {registerStatus
               ? "Already have an account? Sign in"
-              : `Don't have an account? Register`}
+              : `Don't have an account? Sign Up`}
           </Typography>
         </Link>
       </CardActions>
