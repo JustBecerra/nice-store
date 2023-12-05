@@ -18,7 +18,6 @@ export const ProductDetail = ({ item }: props) => {
         display: "flex",
         flexDirection: "column",
         height: "100vh",
-        p: "0.5rem",
         gap: "0.5rem",
         overflow: "scroll",
         justifyContent: "space-between",
@@ -37,7 +36,7 @@ export const ProductDetail = ({ item }: props) => {
           <BackArrow />
         </Toolbar>
       </AppBar>
-      <Box>
+      <Box sx={{ px: "0.5rem" }}>
         <Image
           src={image}
           width={400}
@@ -46,7 +45,14 @@ export const ProductDetail = ({ item }: props) => {
           alt={""}
         />
       </Box>
-      <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "1rem",
+          px: "0.5rem",
+        }}
+      >
         <Typography
           sx={{ fontSize: "1.5rem", color: `${theme.palette.primary.light}` }}
         >

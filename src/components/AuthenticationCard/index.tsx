@@ -3,15 +3,16 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardHeader,
   TextField,
   Typography,
 } from "@mui/material";
 import Link from "next/link";
 import { theme } from "../../../utils/theme";
+import { useState } from "react";
 
 export const AuthenticationCard = () => {
-  const registerStatus = true;
+  const [registerStatus, setRegisterStatus] = useState(false);
+
   return (
     <Card
       variant="outlined"
@@ -91,12 +92,14 @@ export const AuthenticationCard = () => {
       <CardActions sx={{ display: "flex", flexDirection: "column" }}>
         <Button
           sx={{
-            width: "auto",
+            width: "65%",
             border: `1px solid ${theme.palette.primary.light}`,
             borderRadius: "0.75rem",
           }}
         >
-          <Typography sx={{ textTransform: "none" }}>
+          <Typography
+            sx={{ textTransform: "none", color: theme.palette.primary.light }}
+          >
             {registerStatus ? "Sign Up" : "Sign In"}
           </Typography>
         </Button>
@@ -105,12 +108,14 @@ export const AuthenticationCard = () => {
             pathname: "/authentication",
             query: { name: registerStatus ? "signup" : "signin" },
           }}
+          onClick={() => setRegisterStatus((prev) => !prev)}
         >
           <Typography
             sx={{
               textTransform: "none",
-              color: theme.palette.primary.light,
-              my: "1rem",
+              color: theme.palette.primary.main,
+              mt: "1rem",
+              mb: "0.5rem",
             }}
           >
             {registerStatus

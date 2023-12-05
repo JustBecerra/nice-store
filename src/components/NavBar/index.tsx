@@ -9,6 +9,7 @@ export const NavBar = () => {
     <AppBar position="static">
       <Toolbar
         sx={{
+          backgroundColor: theme.palette.background.default,
           display: "flex",
           flexDirection: "row",
           gap: "1.25rem",
@@ -55,7 +56,7 @@ export const NavBar = () => {
                     color: theme.palette.primary.light,
                   }}
                 >
-                  Register
+                  Sign Up
                 </Typography>
               </Button>
             </Link>
