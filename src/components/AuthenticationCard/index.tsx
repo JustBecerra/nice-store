@@ -31,7 +31,11 @@ export const AuthenticationCard = () => {
         }}
       >
         <Typography
-          sx={{ textTransform: "none", color: theme.palette.primary.light }}
+          sx={{
+            textTransform: "none",
+            color: theme.palette.primary.light,
+            fontSize: "1.5rem",
+          }}
         >
           {registerStatus ? "Sign Up to Nice Store" : "Sign In to Nice Store"}
         </Typography>
@@ -85,7 +89,13 @@ export const AuthenticationCard = () => {
         )}
       </CardContent>
       <CardActions sx={{ display: "flex", flexDirection: "column" }}>
-        <Button sx={{ width: "auto" }}>
+        <Button
+          sx={{
+            width: "auto",
+            border: `1px solid ${theme.palette.primary.light}`,
+            borderRadius: "0.75rem",
+          }}
+        >
           <Typography sx={{ textTransform: "none" }}>
             {registerStatus ? "Sign Up" : "Sign In"}
           </Typography>
@@ -99,12 +109,13 @@ export const AuthenticationCard = () => {
           <Typography
             sx={{
               textTransform: "none",
-              color: theme.palette.background.default,
+              color: theme.palette.primary.light,
+              my: "1rem",
             }}
           >
             {registerStatus
               ? "Already have an account? Sign in"
-              : `Don't have an account? Sign Up`}
+              : "Don't have an account? Sign Up"}
           </Typography>
         </Link>
       </CardActions>
