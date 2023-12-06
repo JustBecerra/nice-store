@@ -1,3 +1,4 @@
+"use client";
 import {
   Button,
   Card,
@@ -8,10 +9,12 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { theme } from "../../../utils/theme";
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export const AuthenticationCard = () => {
-  const [registerStatus, setRegisterStatus] = useState(false);
+  const searchParams = useSearchParams();
+
+  const name = searchParams.get("name");
 
   return (
     <Card
@@ -38,7 +41,9 @@ export const AuthenticationCard = () => {
             fontSize: "1.5rem",
           }}
         >
-          {registerStatus ? "Sign Up to Nice Store" : "Sign In to Nice Store"}
+          {name === "signin"
+            ? "Sign In to Nice Store"
+            : "Sign Up to Nice Store"}
         </Typography>
 
         <TextField
@@ -69,7 +74,7 @@ export const AuthenticationCard = () => {
             },
           }}
         />
-        {registerStatus && (
+        {name === "signup" && (
           <TextField
             label="Confirm Password"
             sx={{
@@ -100,15 +105,14 @@ export const AuthenticationCard = () => {
           <Typography
             sx={{ textTransform: "none", color: theme.palette.primary.light }}
           >
-            {registerStatus ? "Sign Up" : "Sign In"}
+            {name === "signin" ? "Sign In" : "Sign Up"}
           </Typography>
         </Button>
         <Link
           href={{
             pathname: "/authentication",
-            query: { name: registerStatus ? "signup" : "signin" },
+            query: { name: name === "signup" ? "signin" : "signup" },
           }}
-          onClick={() => setRegisterStatus((prev) => !prev)}
         >
           <Typography
             sx={{
@@ -118,9 +122,9 @@ export const AuthenticationCard = () => {
               mb: "0.5rem",
             }}
           >
-            {registerStatus
-              ? "Already have an account? Sign in"
-              : "Don't have an account? Sign Up"}
+            {name === "signup"
+              ? "Don't have an account? Sign Up"
+              : "Already have an account? Sign in"}
           </Typography>
         </Link>
       </CardActions>
