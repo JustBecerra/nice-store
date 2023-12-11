@@ -1,5 +1,4 @@
-import { Avatar, Box, Button, TextField, Typography } from "@mui/material";
-import { theme } from "../../../utils/theme";
+import { Avatar, Box, TextField } from "@mui/material";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { ProfileActions } from "../ProfileActions";

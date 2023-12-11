@@ -10,12 +10,14 @@ import {
 import Link from "next/link";
 import { theme } from "../../../utils/theme";
 import { useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 export const AuthenticationCard = () => {
   const searchParams = useSearchParams();
-
   const name = searchParams.get("name");
-
+  const handleGoogleSignIn = () => {
+    signIn("google", { callbackUrl: "http://localhost:3000" });
+  };
   return (
     <Card
       variant="outlined"
@@ -94,7 +96,15 @@ export const AuthenticationCard = () => {
           />
         )}
       </CardContent>
-      <CardActions sx={{ display: "flex", flexDirection: "column" }}>
+      <CardActions
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "1rem",
+        }}
+      >
         <Button
           sx={{
             width: "65%",
@@ -108,6 +118,23 @@ export const AuthenticationCard = () => {
             {name === "signin" ? "Sign In" : "Sign Up"}
           </Typography>
         </Button>
+        {name === "signin" && (
+          <Button
+            sx={{
+              width: "65%",
+              border: `1px solid ${theme.palette.primary.light}`,
+              borderRadius: "0.75rem",
+              ml: "0 !important",
+            }}
+            onClick={handleGoogleSignIn}
+          >
+            <Typography
+              sx={{ textTransform: "none", color: theme.palette.primary.light }}
+            >
+              Sign In with Google
+            </Typography>
+          </Button>
+        )}
         <Link
           href={{
             pathname: "/authentication",
@@ -118,7 +145,6 @@ export const AuthenticationCard = () => {
             sx={{
               textTransform: "none",
               color: theme.palette.primary.main,
-              mt: "1rem",
               mb: "0.5rem",
             }}
           >

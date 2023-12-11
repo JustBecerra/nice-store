@@ -3,8 +3,9 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import Link from "next/link";
 import { theme } from "../../../utils/theme";
+import { useSession } from "next-auth/react";
 export const NavBar = () => {
-  const signedIn = false;
+  const { data: session } = useSession();
   return (
     <AppBar position="static">
       <Toolbar
@@ -17,7 +18,7 @@ export const NavBar = () => {
           width: "auto",
         }}
       >
-        {signedIn ? (
+        {session ? (
           <>
             <Link href={"profile"}>
               <AccountBoxIcon />

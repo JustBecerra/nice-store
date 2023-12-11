@@ -1,7 +1,12 @@
 import { Box, Button, Typography } from "@mui/material";
 import { theme } from "../../../utils/theme";
-
+import { signOut } from "next-auth/react";
+import { redirect } from "next/navigation";
 export const ProfileActions = () => {
+  const handleLogOut = () => {
+    signOut({ callbackUrl: "http://localhost:3000" });
+    redirect("/authentication");
+  };
   return (
     <Box
       sx={{ display: "flex", width: "70%", justifyContent: "space-between" }}
@@ -13,6 +18,7 @@ export const ProfileActions = () => {
           px: "1rem",
           py: "0.75rem",
         }}
+        onClick={handleLogOut}
       >
         <Typography
           sx={{ textTransform: "none", color: theme.palette.primary.light }}
