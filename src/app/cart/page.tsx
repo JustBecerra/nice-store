@@ -14,7 +14,6 @@ const Cart = () => {
         height: "100vh",
         gap: "0.5rem",
         overflow: "scroll",
-        justifyContent: "space-between",
       }}
     >
       <AppBar position="static">
