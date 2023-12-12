@@ -23,7 +23,9 @@ export const NavBar = () => {
             <Link href={"profile"}>
               <AccountBoxIcon />
             </Link>
-            <ShoppingCartIcon />
+            <Link href={"cart"}>
+              <ShoppingCartIcon />
+            </Link>
           </>
         ) : (
           <>

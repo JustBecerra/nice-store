@@ -4,6 +4,7 @@ import { ProductType } from "./types";
 
 type initialStateType = {
   products: ProductType[];
+  productCart: ProductType[];
   productDetail: ProductType;
   status: string;
   error: string;
@@ -11,6 +12,7 @@ type initialStateType = {
 
 const initialState: initialStateType = {
   products: [],
+  productCart: [],
   productDetail: {
     category: "",
     description: "",
@@ -41,8 +43,8 @@ export const products = createSlice({
   name: "product",
   initialState,
   reducers: {
-    addProducts: (state, action: PayloadAction<ProductType[]>) => {
-      state.products = action.payload;
+    addProducts: (state, action: PayloadAction<ProductType>) => {
+      state.productCart = [...state.productCart, action.payload];
     },
   },
   extraReducers: (builder) => {

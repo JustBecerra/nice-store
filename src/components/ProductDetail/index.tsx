@@ -5,12 +5,18 @@ import React from "react";
 import Image from "next/image";
 import { theme } from "../../../utils/theme";
 import { BackArrow } from "../BackArrow";
+import { useDispatch } from "react-redux";
+import { addProducts } from "@/redux/features/product-slice";
 
 interface props {
   item: ProductType;
 }
 export const ProductDetail = ({ item }: props) => {
+  const dispatch = useDispatch();
   const { title, price, image, description, category } = item;
+  const handleDispatch = () => {
+    dispatch(addProducts(item));
+  };
   return (
     <Box
       sx={{
@@ -93,6 +99,7 @@ export const ProductDetail = ({ item }: props) => {
               mb: "1rem",
               mr: "0.5rem",
             }}
+            onClick={handleDispatch}
           >
             <Typography
               sx={{
