@@ -46,6 +46,14 @@ export const products = createSlice({
     addProducts: (state, action: PayloadAction<ProductType>) => {
       state.productCart = [...state.productCart, action.payload];
     },
+    removeProduct: (state, action: PayloadAction<string>) => {
+      const repeated = state.productCart.findIndex(
+        (elem) => elem.title === action.payload
+      );
+      if (repeated !== -1) {
+        state.productCart = state.productCart.splice(repeated, 1);
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -75,5 +83,5 @@ export const products = createSlice({
 });
 
 export { fetchProducts, fetchProduct };
-export const { addProducts } = products.actions;
+export const { addProducts, removeProduct } = products.actions;
 export default products.reducer;
