@@ -8,18 +8,25 @@ import { useEffect, useState } from "react";
 
 export const PurchaseCart = () => {
   const [filteredCart, setFilteredCart] = useState<ProductType[]>([]);
+
   const productCart = useAppSelector(
     (state) => state.productReducer.productCart
   );
-  let titles: string[] = [];
+  console.log({ productCart });
+  console.log({ filteredCart });
+
   useEffect(() => {
-    productCart.forEach((element) => {
-      if (!titles.includes(element.title)) {
-        titles.push(element.title);
-        setFilteredCart([...filteredCart, element]);
-      }
-    });
-  }, []);
+    const uniqueIds = new Set<number>();
+    setFilteredCart(
+      productCart.filter((obj) => {
+        if (uniqueIds.has(obj.id)) {
+          return false; // Duplicate found, skip this object
+        }
+        uniqueIds.add(obj.id);
+        return true; // Unique object, include it in the result
+      })
+    );
+  }, [productCart]);
 
   return (
     <Box

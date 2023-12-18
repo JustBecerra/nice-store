@@ -5,6 +5,7 @@ import { ProductType } from "./types";
 type initialStateType = {
   products: ProductType[];
   productCart: ProductType[];
+  filteredCart: ProductType[];
   productDetail: ProductType;
   status: string;
   error: string;
@@ -13,6 +14,7 @@ type initialStateType = {
 const initialState: initialStateType = {
   products: [],
   productCart: [],
+  filteredCart: [],
   productDetail: {
     category: "",
     description: "",
