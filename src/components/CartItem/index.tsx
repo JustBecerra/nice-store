@@ -20,7 +20,7 @@ export const CartItem = ({
     dispatch(addProducts(product));
   };
   const handleSubtract = () => {
-    dispatch(removeProduct(product.title));
+    dispatch(removeProduct(product.id));
   };
   return (
     <Box

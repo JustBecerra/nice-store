@@ -48,13 +48,11 @@ export const products = createSlice({
     addProducts: (state, action: PayloadAction<ProductType>) => {
       state.productCart = [...state.productCart, action.payload];
     },
-    removeProduct: (state, action: PayloadAction<string>) => {
-      const repeated = state.productCart.findIndex(
-        (elem) => elem.title === action.payload
+    removeProduct: (state, action: PayloadAction<number>) => {
+      const index = state.productCart.findIndex(
+        (elem) => elem.id === action.payload
       );
-      if (repeated !== -1) {
-        state.productCart = state.productCart.splice(repeated, 1);
-      }
+      state.productCart.splice(index, 1);
     },
   },
   extraReducers: (builder) => {
