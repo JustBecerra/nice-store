@@ -16,9 +16,13 @@ export const ProductsList = () => {
     <Box
       sx={{
         display: "flex",
-        justifyContent: "center",
+        justifyContent: { mobile: "center", laptop: "space-around" },
         alignItems: "center",
-        flexDirection: "column",
+        flexDirection: {
+          mobile: "column",
+          laptop: "row",
+        },
+        flexWrap: { laptop: "wrap" },
         width: "100vw",
         gap: "2rem",
         marginY: "1.5rem",
