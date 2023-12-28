@@ -1,5 +1,4 @@
 "use client";
-import { ProductType } from "@/redux/features/types";
 import { Box, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,7 +13,6 @@ interface props {
 
 export const Product = ({ title, price, image, id }: props) => {
   const theme = useTheme();
-  const windowwidth = window.innerWidth > 1200 ? 345 : 305;
   return (
     <Box
       sx={{
@@ -47,7 +45,7 @@ export const Product = ({ title, price, image, id }: props) => {
             overflow: "hidden",
             textOverflow: "ellipsis",
             display: "-webkit-box",
-            WebkitLineClamp: 1, // Number of lines to show before truncating
+            WebkitLineClamp: 1,
             WebkitBoxOrient: "vertical",
           }}
         >

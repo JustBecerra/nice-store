@@ -25,7 +25,8 @@ export const ProductsList = () => {
         flexWrap: { laptop: "wrap" },
         width: "100vw",
         gap: "2rem",
-        marginY: "1.5rem",
+        mt: "5rem",
+        mb: "1.5rem",
       }}
     >
       {products.map((item) => (

@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 export const NavBar = () => {
   const { data: session } = useSession();
   return (
-    <AppBar position="static">
+    <AppBar>
       <Toolbar
         sx={{
           backgroundColor: theme.palette.background.default,
@@ -20,11 +20,19 @@ export const NavBar = () => {
       >
         {session ? (
           <>
-            <Link href={"profile"}>
-              <AccountBoxIcon />
-            </Link>
             <Link href={"cart"}>
-              <ShoppingCartIcon />
+              <ShoppingCartIcon
+                sx={{
+                  color: theme.palette.primary.light,
+                }}
+              />
+            </Link>
+            <Link href={"profile"}>
+              <AccountBoxIcon
+                sx={{
+                  color: theme.palette.primary.light,
+                }}
+              />
             </Link>
           </>
         ) : (
