@@ -1,8 +1,11 @@
-import { Avatar, Box, TextField } from "@mui/material";
+import { Avatar, Box, TextField, Typography } from "@mui/material";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { ProfileActions } from "../ProfileActions";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 export const ProfileForms = () => {
+  const { data: session } = useSession();
   return (
     <Box
       sx={{
@@ -15,9 +18,15 @@ export const ProfileForms = () => {
       component="form"
     >
       <Box sx={{ position: "relative" }}>
-        <Avatar sx={{ mt: "2rem", height: "6rem", width: "6rem" }}>
-          <AccountBoxIcon sx={{ height: "3rem", width: "3rem" }} />
-        </Avatar>
+        {session ? (
+          <Box sx={{ width: "6rem", height: "6rem", borderRadius: "0.75rem" }}>
+            <Image src={session.user?.image as string} fill alt="" />
+          </Box>
+        ) : (
+          <Avatar sx={{ mt: "2rem", height: "6rem", width: "6rem" }}>
+            <AccountBoxIcon sx={{ height: "3rem", width: "3rem" }} />
+          </Avatar>
+        )}
         <Box
           sx={{
             position: "absolute",
@@ -28,12 +37,23 @@ export const ProfileForms = () => {
           <AddCircleIcon sx={{ height: "3rem", width: "3rem" }} />
         </Box>
       </Box>
-
-      <TextField label="First name" sx={{ mt: "1rem" }} />
-      <TextField label="Last name" />
-      <TextField label="Username" />
-      <TextField label="Email" />
-      <TextField label="Address" sx={{ mb: "1rem" }} />
+      {session ? (
+        <>
+          <Typography>{session.user?.name}</Typography>
+          <Typography>{session.user?.email}</Typography>
+          <Typography></Typography>
+          <Typography></Typography>
+          <Typography></Typography>
+        </>
+      ) : (
+        <>
+          <TextField label="First name" sx={{ mt: "1rem" }} />
+          <TextField label="Last name" />
+          <TextField label="Username" />
+          <TextField label="Email" />
+          <TextField label="Address" sx={{ mb: "1rem" }} />
+        </>
+      )}
       <ProfileActions />
     </Box>
   );
