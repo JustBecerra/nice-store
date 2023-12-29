@@ -5,7 +5,14 @@ import { BackArrow } from "@/components/BackArrow";
 import { ProfileForms } from "@/components/ProfileForms";
 const Profile = () => {
   return (
-    <Box sx={{ height: "100vh", backgroundColor: theme.palette.primary.light }}>
+    <Box
+      sx={{
+        height: "100vh",
+        backgroundColor: theme.palette.primary.light,
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <AppBar position="static">
         <Toolbar
           sx={{
