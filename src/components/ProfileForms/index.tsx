@@ -1,15 +1,40 @@
-import { Avatar, Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  FormControl,
+  TextField,
+  Typography,
+} from "@mui/material";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { signOut, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { theme } from "../../../utils/theme";
+import { useState } from "react";
 export const ProfileForms = () => {
   const { data: session } = useSession();
+  const [update, setUpdate] = useState(session ? false : true);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setaddress] = useState("");
+
   const handleLogOut = () => {
     signOut({ callbackUrl: "http://localhost:3000" });
     redirect("/authentication");
   };
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    setInput: React.Dispatch<React.SetStateAction<string>>
+  ) => {
+    setInput(event.target.value);
+  };
+
+  const handleUpdate = () => {
+    const dataObject = { name, email, address };
+    sessionStorage.setItem("userData", JSON.stringify(dataObject));
+  };
+
   return (
     <Box
       sx={{
@@ -20,7 +45,6 @@ export const ProfileForms = () => {
         gap: "1.5rem",
         my: "auto",
       }}
-      component="form"
     >
       <Box sx={{ position: "relative" }}>
         {session ? (
@@ -29,35 +53,67 @@ export const ProfileForms = () => {
             sx={{ borderRadius: "0.75rem", height: "6rem", width: "6rem" }}
           />
         ) : (
-          <Avatar sx={{ mt: "2rem", height: "6rem", width: "6rem" }}>
-            <AccountBoxIcon sx={{ height: "2.5rem", width: "2.5rem" }} />
-          </Avatar>
+          <>
+            <Avatar sx={{ mt: "2rem", height: "6rem", width: "6rem" }}>
+              <AccountBoxIcon sx={{ height: "3rem", width: "3rem" }} />
+            </Avatar>
+            <Box
+              sx={{
+                position: "absolute",
+                bottom: -15,
+                right: 0,
+              }}
+            >
+              <AddCircleIcon sx={{ height: "2.5rem", width: "2.5rem" }} />
+            </Box>
+          </>
         )}
-        <Box
-          sx={{
-            position: "absolute",
-            bottom: -15,
-            right: 0,
-          }}
-        >
-          <AddCircleIcon sx={{ height: "3rem", width: "3rem" }} />
-        </Box>
       </Box>
-      {session ? (
+      {!session || !update ? (
         <>
-          <Typography>{session.user?.name}</Typography>
-          <Typography>{session.user?.email}</Typography>
-          <Typography>address</Typography>
+          <Typography>{name || session!.user?.name}</Typography>
+          <Typography>{email || session!.user?.email}</Typography>
+          <Typography>{address || "address"}</Typography>
         </>
       ) : (
-        <>
-          <TextField label="Name" sx={{ mt: "1rem" }} />
-          <TextField label="Email" />
-          <TextField label="Address" sx={{ mb: "1rem" }} />
-        </>
+        <Box
+          component="form"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <FormControl>
+            <TextField
+              label="Name"
+              sx={{ mt: "1rem" }}
+              onChange={(e) => handleInputChange(e, setName)}
+            />
+          </FormControl>
+          <FormControl>
+            <TextField
+              label="Email"
+              onChange={(e) => handleInputChange(e, setEmail)}
+            />
+          </FormControl>
+          <FormControl>
+            <TextField
+              label="Address"
+              sx={{ mb: "1rem" }}
+              onChange={(e) => handleInputChange(e, setaddress)}
+            />
+          </FormControl>
+        </Box>
       )}
       <Box
-        sx={{ display: "flex", width: "70%", justifyContent: "space-between" }}
+        sx={{
+          display: "flex",
+          width: "70%",
+          justifyContent: "center",
+          gap: "3rem",
+        }}
       >
         {session && (
           <Button
@@ -76,34 +132,55 @@ export const ProfileForms = () => {
             </Typography>
           </Button>
         )}
-        <Button
-          sx={{
-            backgroundColor: theme.palette.warning.main,
-            borderRadius: "0.75rem",
-            px: "1rem",
-            py: "0.75rem",
-          }}
-        >
-          <Typography
-            sx={{ textTransform: "none", color: theme.palette.primary.light }}
+        {(!session || update) && (
+          <Button
+            sx={{
+              backgroundColor: theme.palette.warning.main,
+              borderRadius: "0.75rem",
+              px: "1rem",
+              py: "0.75rem",
+            }}
           >
-            Clear
-          </Typography>
-        </Button>
-        <Button
-          sx={{
-            backgroundColor: theme.palette.success.main,
-            borderRadius: "0.75rem",
-            px: "1rem",
-            py: "0.75rem",
-          }}
-        >
-          <Typography
-            sx={{ textTransform: "none", color: theme.palette.primary.light }}
+            <Typography
+              sx={{ textTransform: "none", color: theme.palette.primary.light }}
+            >
+              Clear
+            </Typography>
+          </Button>
+        )}
+        {!session || !update ? (
+          <Button
+            sx={{
+              backgroundColor: theme.palette.success.main,
+              borderRadius: "0.75rem",
+              px: "1rem",
+              py: "0.75rem",
+            }}
+            onClick={handleUpdate}
           >
-            Update
-          </Typography>
-        </Button>
+            <Typography
+              sx={{ textTransform: "none", color: theme.palette.primary.light }}
+            >
+              Confirm
+            </Typography>
+          </Button>
+        ) : (
+          <Button
+            sx={{
+              backgroundColor: theme.palette.success.main,
+              borderRadius: "0.75rem",
+              px: "1rem",
+              py: "0.75rem",
+            }}
+            onClick={() => setUpdate((prev) => !prev)}
+          >
+            <Typography
+              sx={{ textTransform: "none", color: theme.palette.primary.light }}
+            >
+              Update
+            </Typography>
+          </Button>
+        )}
       </Box>
     </Box>
   );
