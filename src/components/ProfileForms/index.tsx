@@ -33,6 +33,7 @@ export const ProfileForms = () => {
   const handleUpdate = () => {
     const dataObject = { name, email, address };
     sessionStorage.setItem("userData", JSON.stringify(dataObject));
+    setUpdate((prev) => !prev);
   };
 
   return (
@@ -47,26 +48,20 @@ export const ProfileForms = () => {
       }}
     >
       <Box sx={{ position: "relative" }}>
-        {session ? (
-          <Avatar
-            src={session.user?.image as string}
-            sx={{ borderRadius: "0.75rem", height: "6rem", width: "6rem" }}
-          />
-        ) : (
-          <>
-            <Avatar sx={{ mt: "2rem", height: "6rem", width: "6rem" }}>
-              <AccountBoxIcon sx={{ height: "3rem", width: "3rem" }} />
-            </Avatar>
-            <Box
-              sx={{
-                position: "absolute",
-                bottom: -15,
-                right: 0,
-              }}
-            >
-              <AddCircleIcon sx={{ height: "2.5rem", width: "2.5rem" }} />
-            </Box>
-          </>
+        <Avatar
+          src={session!.user?.image as string}
+          sx={{ borderRadius: "0.75rem", height: "6rem", width: "6rem" }}
+        />
+        {update && (
+          <Box
+            sx={{
+              position: "absolute",
+              bottom: -15,
+              right: 0,
+            }}
+          >
+            <AddCircleIcon sx={{ height: "2.5rem", width: "2.5rem" }} />
+          </Box>
         )}
       </Box>
       {!session || !update ? (
@@ -83,11 +78,12 @@ export const ProfileForms = () => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
+            gap: "1rem",
           }}
         >
           <FormControl>
             <TextField
-              label="Name"
+              label="Full Name"
               sx={{ mt: "1rem" }}
               onChange={(e) => handleInputChange(e, setName)}
             />
@@ -115,56 +111,23 @@ export const ProfileForms = () => {
           gap: "3rem",
         }}
       >
-        {session && (
-          <Button
-            sx={{
-              backgroundColor: theme.palette.error.main,
-              borderRadius: "0.75rem",
-              px: "1rem",
-              py: "0.75rem",
-            }}
-            onClick={handleLogOut}
+        <Button
+          sx={{
+            backgroundColor: theme.palette.error.main,
+            borderRadius: "0.75rem",
+            px: "1rem",
+            py: "0.75rem",
+          }}
+          onClick={handleLogOut}
+        >
+          <Typography
+            sx={{ textTransform: "none", color: theme.palette.primary.light }}
           >
-            <Typography
-              sx={{ textTransform: "none", color: theme.palette.primary.light }}
-            >
-              Log out
-            </Typography>
-          </Button>
-        )}
-        {(!session || update) && (
-          <Button
-            sx={{
-              backgroundColor: theme.palette.warning.main,
-              borderRadius: "0.75rem",
-              px: "1rem",
-              py: "0.75rem",
-            }}
-          >
-            <Typography
-              sx={{ textTransform: "none", color: theme.palette.primary.light }}
-            >
-              Clear
-            </Typography>
-          </Button>
-        )}
-        {!session || !update ? (
-          <Button
-            sx={{
-              backgroundColor: theme.palette.success.main,
-              borderRadius: "0.75rem",
-              px: "1rem",
-              py: "0.75rem",
-            }}
-            onClick={handleUpdate}
-          >
-            <Typography
-              sx={{ textTransform: "none", color: theme.palette.primary.light }}
-            >
-              Confirm
-            </Typography>
-          </Button>
-        ) : (
+            Log out
+          </Typography>
+        </Button>
+
+        {!update ? (
           <Button
             sx={{
               backgroundColor: theme.palette.success.main,
@@ -178,6 +141,22 @@ export const ProfileForms = () => {
               sx={{ textTransform: "none", color: theme.palette.primary.light }}
             >
               Update
+            </Typography>
+          </Button>
+        ) : (
+          <Button
+            sx={{
+              backgroundColor: theme.palette.success.main,
+              borderRadius: "0.75rem",
+              px: "1rem",
+              py: "0.75rem",
+            }}
+            onClick={handleUpdate}
+          >
+            <Typography
+              sx={{ textTransform: "none", color: theme.palette.primary.light }}
+            >
+              Confirm
             </Typography>
           </Button>
         )}
