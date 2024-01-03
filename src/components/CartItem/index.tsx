@@ -71,8 +71,8 @@ export const CartItem = ({
         </Box>
       </Box>
 
-      <Typography sx={{ marginLeft: "1rem" }}>{title}</Typography>
-      <Typography sx={{ marginLeft: "1rem" }}>{price}</Typography>
+      <Typography sx={{ marginX: "1rem" }}>{title}</Typography>
+      <Typography sx={{ marginX: "1rem" }}>{price}</Typography>
     </Box>
   );
 };

@@ -13,7 +13,7 @@ const Cart = () => {
         flexDirection: "column",
         height: "100vh",
         gap: "0.5rem",
-        overflow: "scroll",
+        overflow: { mobile: "scroll", laptop: "hidden" },
       }}
     >
       <AppBar position="static">

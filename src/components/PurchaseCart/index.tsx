@@ -29,28 +29,32 @@ export const PurchaseCart = () => {
   return (
     <Box
       sx={{
-        // border: `1px solid ${theme.palette.background.default}`,
         display: "flex",
-        flexDirection: "column",
+        flexDirection: { mobile: "column", laptop: "row" },
+        justifyContent: "center",
+        alignItems: "center",
         gap: "0.5rem",
       }}
     >
-      {filteredCart.map((product) => (
-        <CartItem
-          key={product.id}
-          product={product}
-          repeated={
-            productCart.filter((elem) => elem.title === product.title).length
-          }
-        />
-      ))}
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        {filteredCart.map((product) => (
+          <CartItem
+            key={product.id}
+            product={product}
+            repeated={
+              productCart.filter((elem) => elem.title === product.title).length
+            }
+          />
+        ))}
+      </Box>
       <Box
         sx={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-around",
-          flexDirection: "row",
+          justifyContent: { mobile: "space-around", laptop: "unset" },
+          flexDirection: { mobile: "row", laptop: "column-reverse" },
           marginBottom: "0.5rem",
+          gap: "1rem",
         }}
       >
         <Button sx={{ backgroundColor: `${theme.palette.success.main}` }}>
