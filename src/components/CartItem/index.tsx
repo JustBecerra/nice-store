@@ -25,7 +25,8 @@ export const CartItem = ({
   return (
     <Box
       sx={{
-        border: `1px solid ${theme.palette.background.default}`,
+        border: `2.5px solid ${theme.palette.background.default}`,
+        borderRadius: "0.75rem",
         pt: "0.5rem",
         mx: "0.5rem",
         mt: "0.5rem",
@@ -36,22 +37,42 @@ export const CartItem = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
+          marginLeft: "1rem",
         }}
       >
         <Image src={image} width={100} height={100} alt="" />
-        <Box sx={{ display: "flex" }}>
-          <Button onClick={handleSubtract}>
-            <RemoveIcon />
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: "1rem",
+            marginRight: "0.5rem",
+          }}
+        >
+          <Button
+            sx={{
+              border: `1px solid ${theme.palette.error.main}`,
+              p: "0",
+            }}
+            onClick={handleSubtract}
+          >
+            <RemoveIcon sx={{ color: theme.palette.error.main }} />
           </Button>
           <Typography>{repeated}</Typography>
-          <Button onClick={handleAdd}>
-            <AddIcon />
+          <Button
+            sx={{
+              border: `1px solid ${theme.palette.success.main}`,
+              p: "0",
+            }}
+            onClick={handleAdd}
+          >
+            <AddIcon sx={{ color: theme.palette.success.main }} />
           </Button>
         </Box>
       </Box>
 
-      <Typography>{title}</Typography>
-      <Typography>{price}</Typography>
+      <Typography sx={{ marginLeft: "1rem" }}>{title}</Typography>
+      <Typography sx={{ marginLeft: "1rem" }}>{price}</Typography>
     </Box>
   );
 };

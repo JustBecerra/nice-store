@@ -4,6 +4,7 @@ import { ProductType } from "./types";
 
 type initialStateType = {
   products: ProductType[];
+  finalPrice: number;
   productCart: ProductType[];
   filteredCart: ProductType[];
   productDetail: ProductType;
@@ -15,6 +16,7 @@ const initialState: initialStateType = {
   products: [],
   productCart: [],
   filteredCart: [],
+  finalPrice: 0,
   productDetail: {
     category: "",
     description: "",
@@ -47,12 +49,17 @@ export const products = createSlice({
   reducers: {
     addProducts: (state, action: PayloadAction<ProductType>) => {
       state.productCart = [...state.productCart, action.payload];
+      state.finalPrice = state.finalPrice + action.payload.price;
     },
     removeProduct: (state, action: PayloadAction<number>) => {
       const index = state.productCart.findIndex(
         (elem) => elem.id === action.payload
       );
       state.productCart.splice(index, 1);
+      const product = state.productCart.find(
+        (product) => product.id === action.payload
+      );
+      if (product) state.finalPrice = state.finalPrice - product.price;
     },
   },
   extraReducers: (builder) => {

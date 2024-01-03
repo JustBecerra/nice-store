@@ -136,7 +136,7 @@ export const ProductDetail = ({ item }: props) => {
             <Button
               sx={{
                 border: `1px solid ${theme.palette.primary.light}`,
-                backgroundColor: theme.palette.primary.main,
+                backgroundColor: theme.palette.success.main,
                 borderRadius: "0.75rem",
                 mb: "1rem",
                 mr: "0.5rem",
