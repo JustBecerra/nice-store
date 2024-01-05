@@ -5,6 +5,7 @@ import { theme } from "../../../utils/theme";
 import { CartItem } from "../CartItem";
 import { ProductType } from "@/redux/features/types";
 import { useEffect, useState } from "react";
+import MoodBadIcon from "@mui/icons-material/MoodBad";
 
 export const PurchaseCart = () => {
   const [filteredCart, setFilteredCart] = useState<ProductType[]>([]);
@@ -33,37 +34,55 @@ export const PurchaseCart = () => {
         flexDirection: { mobile: "column", laptop: "row" },
         justifyContent: "center",
         alignItems: "center",
+        height: "100%",
         gap: "0.5rem",
       }}
     >
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
-        {filteredCart.map((product) => (
-          <CartItem
-            key={product.id}
-            product={product}
-            repeated={
-              productCart.filter((elem) => elem.title === product.title).length
-            }
-          />
-        ))}
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: { mobile: "space-around", laptop: "unset" },
-          flexDirection: { mobile: "row", laptop: "column-reverse" },
-          marginBottom: "0.5rem",
-          gap: "1rem",
-        }}
-      >
-        <Button sx={{ backgroundColor: `${theme.palette.success.main}` }}>
-          <Typography sx={{ color: theme.palette.primary.light }}>
-            Confirm Purchase
-          </Typography>
-        </Button>
-        <Typography>Total Price: ${finalPrice}</Typography>
-      </Box>
+      {filteredCart.length > 0 ? (
+        <>
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            {filteredCart.map((product) => (
+              <CartItem
+                key={product.id}
+                product={product}
+                repeated={
+                  productCart.filter((elem) => elem.title === product.title)
+                    .length
+                }
+              />
+            ))}
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: { mobile: "space-around", laptop: "unset" },
+              flexDirection: { mobile: "row", laptop: "column-reverse" },
+              marginBottom: "0.5rem",
+              gap: "1rem",
+            }}
+          >
+            <Button sx={{ backgroundColor: `${theme.palette.success.main}` }}>
+              <Typography sx={{ color: theme.palette.primary.light }}>
+                Confirm Purchase
+              </Typography>
+            </Button>
+            <Typography>Total Price: ${finalPrice}</Typography>
+          </Box>
+        </>
+      ) : (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            margin: "auto",
+          }}
+        >
+          <MoodBadIcon sx={{ width: "5rem", height: "5rem" }} />
+          <Typography>You don&apos;t have any items on your cart.</Typography>
+        </Box>
+      )}
     </Box>
   );
 };
