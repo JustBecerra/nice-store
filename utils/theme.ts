@@ -33,6 +33,9 @@ export const theme = createTheme({
       desktop: 1536,
     },
   },
+  typography: {
+    fontFamily: ["Helvetica", "Arial", "sans-serif"].join(","),
+  },
   palette: {
     primary: {
       main: "#5bc0de",

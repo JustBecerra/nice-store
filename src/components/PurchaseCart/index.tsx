@@ -80,7 +80,7 @@ export const PurchaseCart = () => {
           }}
         >
           <MoodBadIcon sx={{ width: "5rem", height: "5rem" }} />
-          <Typography>You don&apos;t have any items on your cart.</Typography>
+          <Typography>You don&apos;t have any items in your cart.</Typography>
         </Box>
       )}
     </Box>
