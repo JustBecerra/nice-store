@@ -1,5 +1,6 @@
 "use client";
 import {
+  Box,
   Button,
   Card,
   CardActions,
@@ -23,7 +24,7 @@ export const AuthenticationCard = () => {
       variant="outlined"
       sx={{
         backgroundColor: theme.palette.background.default,
-        width: "90%",
+        width: { mobile: "90%", laptop: "40%" },
         borderRadius: "0.75rem",
       }}
     >
@@ -51,6 +52,7 @@ export const AuthenticationCard = () => {
         <TextField
           label="Email"
           sx={{
+            width: { laptop: "50%" },
             "& .MuiInputLabel-root": {
               color: theme.palette.primary.light,
             },
@@ -65,6 +67,7 @@ export const AuthenticationCard = () => {
         <TextField
           label="Password"
           sx={{
+            width: { laptop: "50%" },
             "& .MuiInputLabel-root": {
               color: theme.palette.primary.light,
             },
@@ -80,6 +83,7 @@ export const AuthenticationCard = () => {
           <TextField
             label="Confirm Password"
             sx={{
+              width: { laptop: "50%" },
               "& .MuiInputLabel-root": {
                 color: theme.palette.primary.light,
               },
@@ -105,36 +109,50 @@ export const AuthenticationCard = () => {
           gap: "1rem",
         }}
       >
-        <Button
+        <Box
           sx={{
-            width: "65%",
-            border: `1px solid ${theme.palette.primary.light}`,
-            borderRadius: "0.75rem",
+            display: "flex",
+            width: "100%",
+            flexDirection: { mobile: "column", laptop: "row" },
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "1rem",
           }}
         >
-          <Typography
-            sx={{ textTransform: "none", color: theme.palette.primary.light }}
-          >
-            {name === "signin" ? "Sign In" : "Sign Up"}
-          </Typography>
-        </Button>
-        {name === "signin" && (
           <Button
             sx={{
-              width: "65%",
+              width: { mobile: "65%", laptop: "35%" },
               border: `1px solid ${theme.palette.primary.light}`,
               borderRadius: "0.75rem",
-              ml: "0 !important",
             }}
-            onClick={handleGoogleSignIn}
           >
             <Typography
               sx={{ textTransform: "none", color: theme.palette.primary.light }}
             >
-              Sign In with Google
+              {name === "signin" ? "Sign In" : "Sign Up"}
             </Typography>
           </Button>
-        )}
+          {name === "signin" && (
+            <Button
+              sx={{
+                width: { mobile: "65%", laptop: "35%" },
+                border: `1px solid ${theme.palette.primary.light}`,
+                borderRadius: "0.75rem",
+                ml: "0 !important",
+              }}
+              onClick={handleGoogleSignIn}
+            >
+              <Typography
+                sx={{
+                  textTransform: "none",
+                  color: theme.palette.primary.light,
+                }}
+              >
+                Sign In with Google
+              </Typography>
+            </Button>
+          )}
+        </Box>
         <Link
           href={{
             pathname: "/authentication",
