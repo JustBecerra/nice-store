@@ -13,8 +13,6 @@ import { redirect } from "next/navigation";
 import { theme } from "../../../utils/theme";
 import { useState } from "react";
 
-type SelectedImageType = string | null;
-
 export const ProfileForms = () => {
   const { data: session } = useSession();
   const [selectedImage, setSelectedImage] = useState("");
@@ -43,7 +41,6 @@ export const ProfileForms = () => {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const file = e.target.files[0];
-      console.log("file", e);
       if (file) {
         const imageUrl = URL.createObjectURL(file);
         setSelectedImage(imageUrl);

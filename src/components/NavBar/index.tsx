@@ -1,11 +1,11 @@
-import { AppBar, Button, Toolbar, Typography } from "@mui/material";
+import { AppBar, Avatar, Button, Toolbar, Typography } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import Link from "next/link";
 import { theme } from "../../../utils/theme";
 import { useSession } from "next-auth/react";
 export const NavBar = () => {
   const { data: session } = useSession();
+  // const image = sessionStorage.getItem("selectedImage");
   return (
     <AppBar>
       <Toolbar
@@ -28,10 +28,14 @@ export const NavBar = () => {
               />
             </Link>
             <Link href={"profile"}>
-              <AccountBoxIcon
+              {/* <AccountBoxIcon
                 sx={{
                   color: theme.palette.primary.light,
                 }}
+              /> */}
+              <Avatar
+                src={session!.user?.image as string}
+                sx={{ borderRadius: "0.75rem", height: "2rem", width: "2rem" }}
               />
             </Link>
           </>
