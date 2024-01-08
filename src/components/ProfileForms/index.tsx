@@ -3,17 +3,21 @@ import {
   Box,
   Button,
   FormControl,
+  Input,
   TextField,
   Typography,
 } from "@mui/material";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { signOut, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { theme } from "../../../utils/theme";
 import { useState } from "react";
+
+type SelectedImageType = string | null;
+
 export const ProfileForms = () => {
   const { data: session } = useSession();
+  const [selectedImage, setSelectedImage] = useState("");
   const [update, setUpdate] = useState(session ? false : true);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -31,9 +35,20 @@ export const ProfileForms = () => {
   };
 
   const handleUpdate = () => {
-    const dataObject = { name, email, address };
+    const dataObject = { name, email, address, selectedImage };
     sessionStorage.setItem("userData", JSON.stringify(dataObject));
     setUpdate((prev) => !prev);
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const file = e.target.files[0];
+      console.log("file", e);
+      if (file) {
+        const imageUrl = URL.createObjectURL(file);
+        setSelectedImage(imageUrl);
+      }
+    }
   };
 
   return (
@@ -47,23 +62,11 @@ export const ProfileForms = () => {
         my: "auto",
       }}
     >
-      <Box sx={{ position: "relative" }}>
-        <Avatar
-          src={session!.user?.image as string}
-          sx={{ borderRadius: "0.75rem", height: "6rem", width: "6rem" }}
-        />
-        {update && (
-          <Box
-            sx={{
-              position: "absolute",
-              bottom: -15,
-              right: 0,
-            }}
-          >
-            <AddCircleIcon sx={{ height: "2.5rem", width: "2.5rem" }} />
-          </Box>
-        )}
-      </Box>
+      <Avatar
+        src={selectedImage ? selectedImage : (session!.user?.image as string)}
+        sx={{ borderRadius: "0.75rem", height: "6rem", width: "6rem" }}
+      />
+
       {!session || !update ? (
         <>
           <Typography>{name || session!.user?.name}</Typography>
@@ -81,6 +84,17 @@ export const ProfileForms = () => {
             gap: "1rem",
           }}
         >
+          <FormControl>
+            {update && (
+              <Input
+                type="file"
+                onChange={handleImageChange}
+                onClick={(e: React.MouseEvent<HTMLInputElement>) =>
+                  e.stopPropagation()
+                }
+              />
+            )}
+          </FormControl>
           <FormControl>
             <TextField
               label="Full Name"
