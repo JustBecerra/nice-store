@@ -1,6 +1,15 @@
 "use client";
 import { ProductType } from "@/redux/features/types";
-import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import {
+  Alert,
+  AppBar,
+  Box,
+  Button,
+  Snackbar,
+  SnackbarOrigin,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import Image from "next/image";
 import { theme } from "../../../utils/theme";
@@ -11,10 +20,31 @@ import { addProducts } from "@/redux/features/product-slice";
 interface props {
   item: ProductType;
 }
+
+interface State extends SnackbarOrigin {
+  open: boolean;
+}
 export const ProductDetail = ({ item }: props) => {
+  const [state, setState] = React.useState<State>({
+    open: false,
+    vertical: "bottom",
+    horizontal: "right",
+  });
+  const { vertical, horizontal, open } = state;
   const dispatch = useDispatch();
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setState({ ...state, open: false });
+  };
   const { title, price, image, description, category, rating } = item;
-  const handleDispatch = () => {
+  const handleDispatch = (newState: SnackbarOrigin) => {
+    setState({ ...newState, open: true });
     dispatch(addProducts(item));
   };
   return (
@@ -132,6 +162,21 @@ export const ProductDetail = ({ item }: props) => {
               {description}.
             </Typography>
           </Box>
+          <Snackbar
+            open={open}
+            anchorOrigin={{ vertical, horizontal }}
+            autoHideDuration={3000}
+            onClose={handleClose}
+            message="Product added"
+          >
+            <Alert
+              onClose={handleClose}
+              severity="success"
+              sx={{ width: { mobile: "100%", laptop: "25%" } }}
+            >
+              Product added
+            </Alert>
+          </Snackbar>
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Button
               sx={{
@@ -142,7 +187,12 @@ export const ProductDetail = ({ item }: props) => {
                 mr: "0.5rem",
                 width: { laptop: "15rem" },
               }}
-              onClick={handleDispatch}
+              onClick={() =>
+                handleDispatch({
+                  vertical: "top",
+                  horizontal: "center",
+                })
+              }
             >
               <Typography
                 sx={{

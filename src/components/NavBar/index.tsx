@@ -28,11 +28,6 @@ export const NavBar = () => {
               />
             </Link>
             <Link href={"profile"}>
-              {/* <AccountBoxIcon
-                sx={{
-                  color: theme.palette.primary.light,
-                }}
-              /> */}
               <Avatar
                 src={session!.user?.image as string}
                 sx={{ borderRadius: "0.75rem", height: "2rem", width: "2rem" }}
