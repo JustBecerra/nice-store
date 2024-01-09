@@ -8,7 +8,7 @@ import { fetchProducts } from "@/redux/features/product-slice";
 export const ProductsList = () => {
   const products = useAppSelector((state) => state.productReducer.products);
   const dispatch = useDispatch<AppDispatch>();
-  console.log("products", products);
+
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);

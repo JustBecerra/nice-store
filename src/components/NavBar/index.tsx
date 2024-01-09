@@ -1,4 +1,11 @@
-import { AppBar, Avatar, Button, Toolbar, Typography } from "@mui/material";
+import {
+  AppBar,
+  Avatar,
+  Button,
+  TextField,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Link from "next/link";
 import { theme } from "../../../utils/theme";
@@ -18,6 +25,21 @@ export const NavBar = () => {
           width: "auto",
         }}
       >
+        <TextField
+          label="Search"
+          size="small"
+          sx={{
+            "& .MuiInputLabel-root": {
+              color: theme.palette.primary.light,
+            },
+            "& .MuiInput-root": {
+              color: theme.palette.primary.light,
+            },
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: theme.palette.primary.light,
+            },
+          }}
+        />
         {session ? (
           <>
             <Link href={"cart"}>
