@@ -10,7 +10,12 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Link from "next/link";
 import { theme } from "../../../utils/theme";
 import { useSession } from "next-auth/react";
-export const NavBar = () => {
+import { Dispatch, SetStateAction } from "react";
+export const NavBar = ({
+  setProductName,
+}: {
+  setProductName: Dispatch<SetStateAction<string>>;
+}) => {
   const { data: session } = useSession();
   // const image = sessionStorage.getItem("selectedImage");
   return (
@@ -28,6 +33,7 @@ export const NavBar = () => {
         <TextField
           label="Search"
           size="small"
+          onChange={(e) => setProductName(e.target.value)}
           sx={{
             "& .MuiInputLabel-root": {
               color: theme.palette.primary.light,
