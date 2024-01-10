@@ -62,6 +62,9 @@ export const AuthenticationCard = () => {
             "& .MuiOutlinedInput-notchedOutline": {
               borderColor: theme.palette.primary.light,
             },
+            "& .MuiInputBase-input": {
+              color: theme.palette.primary.light,
+            },
           }}
         />
         <TextField
@@ -76,6 +79,9 @@ export const AuthenticationCard = () => {
             },
             "& .MuiOutlinedInput-notchedOutline": {
               borderColor: theme.palette.primary.light,
+            },
+            "& .MuiInputBase-input": {
+              color: theme.palette.primary.light,
             },
           }}
         />
@@ -94,6 +100,9 @@ export const AuthenticationCard = () => {
                 borderColor: theme.palette.primary.light,
               },
               "& .MuiFilledInput": {
+                color: theme.palette.primary.light,
+              },
+              "& .MuiInputBase-input": {
                 color: theme.palette.primary.light,
               },
             }}
