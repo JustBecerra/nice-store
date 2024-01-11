@@ -44,6 +44,12 @@ export const NavBar = ({
             "& .MuiOutlinedInput-notchedOutline": {
               borderColor: theme.palette.primary.light,
             },
+            "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
+              borderColor: theme.palette.primary.light,
+            },
+            "&:hover": {
+              borderColor: theme.palette.primary.light,
+            },
             "& .MuiInputBase-input": {
               color: theme.palette.primary.light,
             },

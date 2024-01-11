@@ -59,6 +59,9 @@ export const AuthenticationCard = () => {
             "& .MuiInput-root": {
               color: theme.palette.primary.light,
             },
+            "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
+              borderColor: theme.palette.primary.light,
+            },
             "& .MuiOutlinedInput-notchedOutline": {
               borderColor: theme.palette.primary.light,
             },
@@ -76,6 +79,9 @@ export const AuthenticationCard = () => {
             },
             "& .MuiInput-root": {
               color: theme.palette.primary.light,
+            },
+            "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
+              borderColor: theme.palette.primary.light,
             },
             "& .MuiOutlinedInput-notchedOutline": {
               borderColor: theme.palette.primary.light,
@@ -96,6 +102,10 @@ export const AuthenticationCard = () => {
               "& .MuiInput-root": {
                 color: theme.palette.primary.light,
               },
+              "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":
+                {
+                  borderColor: theme.palette.primary.light,
+                },
               "& .MuiOutlinedInput-notchedOutline": {
                 borderColor: theme.palette.primary.light,
               },
