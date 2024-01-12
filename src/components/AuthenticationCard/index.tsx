@@ -70,6 +70,33 @@ export const AuthenticationCard = () => {
             },
           }}
         />
+        {name === "signup" && (
+          <TextField
+            label="Full Name"
+            sx={{
+              width: { laptop: "50%" },
+              "& .MuiInputLabel-root": {
+                color: theme.palette.primary.light,
+              },
+              "& .MuiInput-root": {
+                color: theme.palette.primary.light,
+              },
+              "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":
+                {
+                  borderColor: theme.palette.primary.light,
+                },
+              "& .MuiOutlinedInput-notchedOutline": {
+                borderColor: theme.palette.primary.light,
+              },
+              "& .MuiFilledInput": {
+                color: theme.palette.primary.light,
+              },
+              "& .MuiInputBase-input": {
+                color: theme.palette.primary.light,
+              },
+            }}
+          />
+        )}
         <TextField
           label="Password"
           sx={{
@@ -186,8 +213,8 @@ export const AuthenticationCard = () => {
             }}
           >
             {name === "signup"
-              ? "Don't have an account? Sign Up"
-              : "Already have an account? Sign in"}
+              ? "Already have an account? Sign in"
+              : "Don't have an account? Sign Up"}
           </Typography>
         </Link>
       </CardActions>
