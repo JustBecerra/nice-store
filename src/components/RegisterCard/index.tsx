@@ -1,14 +1,28 @@
-import { Button, FormControl, TextField, Typography } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import React, { FormEvent } from "react";
 import { theme } from "../../../utils/theme";
+import axios from "axios";
 
 export const RegisterCard = () => {
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData();
+    try {
+      const formData = new FormData(e.currentTarget);
+      const response = await axios.post("api/auth/register", {
+        email: formData.get("email"),
+        fullname: formData.get("fullname"),
+        password: formData.get("password"),
+      });
+
+      // Handle the response as needed
+      console.log(response.data);
+    } catch (error) {
+      // Handle errors
+      console.error("Error during registration:", error);
+    }
   };
   return (
-    <FormControl onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <Typography
         sx={{
           textTransform: "none",
@@ -21,6 +35,7 @@ export const RegisterCard = () => {
 
       <TextField
         label="Email"
+        name="email"
         sx={{
           width: { laptop: "50%" },
           "& .MuiInputLabel-root": {
@@ -42,6 +57,7 @@ export const RegisterCard = () => {
       />
       <TextField
         label="Full Name"
+        name="fullname"
         sx={{
           width: { laptop: "50%" },
           "& .MuiInputLabel-root": {
@@ -66,6 +82,7 @@ export const RegisterCard = () => {
       />
       <TextField
         label="Password"
+        name="password"
         sx={{
           width: { laptop: "50%" },
           "& .MuiInputLabel-root": {
@@ -123,6 +140,6 @@ export const RegisterCard = () => {
           Sign Up
         </Typography>
       </Button>
-    </FormControl>
+    </form>
   );
 };

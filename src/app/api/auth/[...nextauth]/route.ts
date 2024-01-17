@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import EmailProvider from "next-auth/providers/email";
 import CredentialsProvider from "next-auth/providers/credentials";
-export const authOptions = {
+const handler = NextAuth({
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -53,7 +53,6 @@ export const authOptions = {
       from: process.env.EMAIL_FROM,
     }),
   ],
-};
+});
 
-export const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
