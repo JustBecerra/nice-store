@@ -1,10 +1,26 @@
 import { Button, TextField, Typography } from "@mui/material";
-import React from "react";
+import React, { FormEvent } from "react";
 import { theme } from "../../../utils/theme";
+import { signIn } from "next-auth/react";
 
 export const LoginCard = () => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const formData = new FormData(e.currentTarget);
+      const response = await signIn("credentials", {
+        email: formData.get("email"),
+        password: formData.get("password"),
+        redirect: false,
+      });
+      console.log({ response });
+    } catch (error) {
+      // Handle errors
+      console.error("Error during registration:", error);
+    }
+  };
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       <Typography
         sx={{
           textTransform: "none",
@@ -17,6 +33,7 @@ export const LoginCard = () => {
 
       <TextField
         label="Email"
+        name="email"
         sx={{
           width: { laptop: "50%" },
           "& .MuiInputLabel-root": {
@@ -38,6 +55,7 @@ export const LoginCard = () => {
       />
       <TextField
         label="Password"
+        name="password"
         sx={{
           width: { laptop: "50%" },
           "& .MuiInputLabel-root": {
@@ -63,6 +81,7 @@ export const LoginCard = () => {
           border: `1px solid ${theme.palette.primary.light}`,
           borderRadius: "0.75rem",
         }}
+        type="submit"
       >
         <Typography
           sx={{ textTransform: "none", color: theme.palette.primary.light }}
@@ -70,6 +89,6 @@ export const LoginCard = () => {
           Sign In
         </Typography>
       </Button>
-    </>
+    </form>
   );
 };
