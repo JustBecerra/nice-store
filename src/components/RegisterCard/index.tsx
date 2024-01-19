@@ -1,4 +1,4 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { FormEvent } from "react";
 import { theme } from "../../../utils/theme";
 import axios from "axios";
@@ -23,123 +23,133 @@ export const RegisterCard = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <Typography
+      <Box
         sx={{
-          textTransform: "none",
-          color: theme.palette.primary.light,
-          fontSize: "1.5rem",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          gap: "1.5rem",
         }}
-      >
-        Sign Up to Nice Store
-      </Typography>
-
-      <TextField
-        label="Email"
-        name="email"
-        sx={{
-          width: { laptop: "50%" },
-          "& .MuiInputLabel-root": {
-            color: theme.palette.primary.light,
-          },
-          "& .MuiInput-root": {
-            color: theme.palette.primary.light,
-          },
-          "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: theme.palette.primary.light,
-          },
-          "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: theme.palette.primary.light,
-          },
-          "& .MuiInputBase-input": {
-            color: theme.palette.primary.light,
-          },
-        }}
-      />
-      <TextField
-        label="Full Name"
-        name="fullname"
-        sx={{
-          width: { laptop: "50%" },
-          "& .MuiInputLabel-root": {
-            color: theme.palette.primary.light,
-          },
-          "& .MuiInput-root": {
-            color: theme.palette.primary.light,
-          },
-          "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: theme.palette.primary.light,
-          },
-          "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: theme.palette.primary.light,
-          },
-          "& .MuiFilledInput": {
-            color: theme.palette.primary.light,
-          },
-          "& .MuiInputBase-input": {
-            color: theme.palette.primary.light,
-          },
-        }}
-      />
-      <TextField
-        label="Password"
-        name="password"
-        sx={{
-          width: { laptop: "50%" },
-          "& .MuiInputLabel-root": {
-            color: theme.palette.primary.light,
-          },
-          "& .MuiInput-root": {
-            color: theme.palette.primary.light,
-          },
-          "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: theme.palette.primary.light,
-          },
-          "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: theme.palette.primary.light,
-          },
-          "& .MuiInputBase-input": {
-            color: theme.palette.primary.light,
-          },
-        }}
-      />
-      <TextField
-        label="Confirm Password"
-        sx={{
-          width: { laptop: "50%" },
-          "& .MuiInputLabel-root": {
-            color: theme.palette.primary.light,
-          },
-          "& .MuiInput-root": {
-            color: theme.palette.primary.light,
-          },
-          "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: theme.palette.primary.light,
-          },
-          "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: theme.palette.primary.light,
-          },
-          "& .MuiFilledInput": {
-            color: theme.palette.primary.light,
-          },
-          "& .MuiInputBase-input": {
-            color: theme.palette.primary.light,
-          },
-        }}
-      />
-      <Button
-        sx={{
-          width: { mobile: "65%", laptop: "35%" },
-          border: `1px solid ${theme.palette.primary.light}`,
-          borderRadius: "0.75rem",
-        }}
-        type="submit"
       >
         <Typography
-          sx={{ textTransform: "none", color: theme.palette.primary.light }}
+          sx={{
+            textTransform: "none",
+            color: theme.palette.primary.light,
+            fontSize: "1.5rem",
+          }}
         >
-          Sign Up
+          Sign Up to Nice Store
         </Typography>
-      </Button>
+
+        <TextField
+          label="Email"
+          name="email"
+          sx={{
+            width: { laptop: "50%" },
+            "& .MuiInputLabel-root": {
+              color: theme.palette.primary.light,
+            },
+            "& .MuiInput-root": {
+              color: theme.palette.primary.light,
+            },
+            "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
+              borderColor: theme.palette.primary.light,
+            },
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: theme.palette.primary.light,
+            },
+            "& .MuiInputBase-input": {
+              color: theme.palette.primary.light,
+            },
+          }}
+        />
+        <TextField
+          label="Full Name"
+          name="fullname"
+          sx={{
+            width: { laptop: "50%" },
+            "& .MuiInputLabel-root": {
+              color: theme.palette.primary.light,
+            },
+            "& .MuiInput-root": {
+              color: theme.palette.primary.light,
+            },
+            "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
+              borderColor: theme.palette.primary.light,
+            },
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: theme.palette.primary.light,
+            },
+            "& .MuiFilledInput": {
+              color: theme.palette.primary.light,
+            },
+            "& .MuiInputBase-input": {
+              color: theme.palette.primary.light,
+            },
+          }}
+        />
+        <TextField
+          label="Password"
+          name="password"
+          sx={{
+            width: { laptop: "50%" },
+            "& .MuiInputLabel-root": {
+              color: theme.palette.primary.light,
+            },
+            "& .MuiInput-root": {
+              color: theme.palette.primary.light,
+            },
+            "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
+              borderColor: theme.palette.primary.light,
+            },
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: theme.palette.primary.light,
+            },
+            "& .MuiInputBase-input": {
+              color: theme.palette.primary.light,
+            },
+          }}
+        />
+        <TextField
+          label="Confirm Password"
+          sx={{
+            width: { laptop: "50%" },
+            "& .MuiInputLabel-root": {
+              color: theme.palette.primary.light,
+            },
+            "& .MuiInput-root": {
+              color: theme.palette.primary.light,
+            },
+            "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
+              borderColor: theme.palette.primary.light,
+            },
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: theme.palette.primary.light,
+            },
+            "& .MuiFilledInput": {
+              color: theme.palette.primary.light,
+            },
+            "& .MuiInputBase-input": {
+              color: theme.palette.primary.light,
+            },
+          }}
+        />
+        <Button
+          sx={{
+            width: { mobile: "65%", laptop: "35%" },
+            border: `1px solid ${theme.palette.primary.light}`,
+            borderRadius: "0.75rem",
+          }}
+          type="submit"
+        >
+          <Typography
+            sx={{ textTransform: "none", color: theme.palette.primary.light }}
+          >
+            Sign Up
+          </Typography>
+        </Button>
+      </Box>
     </form>
   );
 };

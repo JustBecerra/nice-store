@@ -29,15 +29,7 @@ export const AuthenticationCard = () => {
         borderRadius: "0.75rem",
       }}
     >
-      <CardContent
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          gap: "1.5rem",
-        }}
-      >
+      <CardContent>
         {name === "signin" ? <LoginCard /> : <RegisterCard />}
       </CardContent>
       <CardActions
