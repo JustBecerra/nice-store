@@ -40,14 +40,9 @@ const handler = NextAuth({
           };
         }
 
-        console.log({ passwordCorrect });
         return null;
       },
     }),
-    // EmailProvider({
-    //   server: process.env.EMAIL_SERVER,
-    //   from: process.env.EMAIL_FROM,
-    // }),
   ],
 });
 

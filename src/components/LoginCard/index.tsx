@@ -11,7 +11,8 @@ export const LoginCard = () => {
       await signIn("credentials", {
         email: formData.get("email"),
         password: formData.get("password"),
-        redirect: false,
+        redirect: true,
+        callbackUrl: "/",
       });
     } catch (error) {
       // Handle errors
