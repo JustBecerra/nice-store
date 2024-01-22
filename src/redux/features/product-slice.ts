@@ -9,6 +9,7 @@ type initialStateType = {
   filteredCart: ProductType[];
   productDetail: ProductType;
   status: string;
+  detailStatus: string;
   error: string;
 };
 
@@ -30,6 +31,7 @@ const initialState: initialStateType = {
     title: "",
   },
   status: "",
+  detailStatus: "",
   error: "",
 } as initialStateType;
 
@@ -79,14 +81,14 @@ export const products = createSlice({
         state.error = action.error.message as string;
       })
       .addCase(fetchProduct.pending, (state) => {
-        state.status = "loading";
+        state.detailStatus = "loading";
       })
       .addCase(fetchProduct.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.detailStatus = "succeeded";
         state.productDetail = action.payload;
       })
       .addCase(fetchProduct.rejected, (state, action) => {
-        state.status = "failed";
+        state.detailStatus = "failed";
         state.error = action.error.message as string;
       });
   },

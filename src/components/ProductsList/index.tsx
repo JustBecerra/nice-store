@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchProducts } from "@/redux/features/product-slice";
 import { ProductType } from "@/redux/features/types";
+import { theme } from "../../../utils/theme";
 
 export const ProductsList = ({ productName }: { productName: string }) => {
   const [filteredProducts, setFilteredProducts] = useState<ProductType[]>([]);
@@ -51,7 +52,10 @@ export const ProductsList = ({ productName }: { productName: string }) => {
     >
       {open ? (
         <Backdrop
-          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          sx={{
+            color: theme.palette.primary.light,
+            zIndex: (theme) => theme.zIndex.drawer + 1,
+          }}
           open={open}
         >
           <CircularProgress color="inherit" />

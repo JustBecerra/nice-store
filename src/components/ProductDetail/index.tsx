@@ -3,19 +3,22 @@ import { ProductType } from "@/redux/features/types";
 import {
   Alert,
   AppBar,
+  Backdrop,
   Box,
   Button,
+  CircularProgress,
   Snackbar,
   SnackbarOrigin,
   Toolbar,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { theme } from "../../../utils/theme";
 import { BackArrow } from "../BackArrow";
 import { useDispatch } from "react-redux";
 import { addProducts } from "@/redux/features/product-slice";
+import { useAppSelector } from "@/redux/store";
 
 interface props {
   item: ProductType;
@@ -30,8 +33,10 @@ export const ProductDetail = ({ item }: props) => {
     vertical: "bottom",
     horizontal: "right",
   });
+  const [openLoader, setOpenLoader] = useState(false);
   const { vertical, horizontal, open } = state;
   const dispatch = useDispatch();
+  const status = useAppSelector((state) => state.productReducer.detailStatus);
   const handleClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
@@ -42,6 +47,13 @@ export const ProductDetail = ({ item }: props) => {
 
     setState({ ...state, open: false });
   };
+  useEffect(() => {
+    if (status === "loading") {
+      setOpenLoader(true);
+    } else {
+      setOpenLoader(false);
+    }
+  }, [status]);
   const { title, price, image, description, category, rating } = item;
   const handleDispatch = (newState: SnackbarOrigin) => {
     setState({ ...newState, open: true });
@@ -73,6 +85,7 @@ export const ProductDetail = ({ item }: props) => {
           <BackArrow />
         </Toolbar>
       </AppBar>
+
       <Box
         sx={{
           display: "flex",
@@ -82,129 +95,146 @@ export const ProductDetail = ({ item }: props) => {
           gap: "1rem",
         }}
       >
-        <Box
-          sx={{
-            position: "relative",
-            width: { mobile: "98%", laptop: "70%" },
-            height: { laptop: "800px" },
-            paddingBottom: { mobile: "160%", laptop: "0" },
-            overflow: "hidden",
-            borderRadius: "0.75rem",
-            marginLeft: { laptop: "2rem" },
-            marginTop: { laptop: "0.5rem" },
-          }}
-        >
-          <Image src={image} layout="fill" objectFit="cover" alt={""} />
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            width: "100%",
-            height: "90%",
-            gap: "1rem",
-            px: "0.5rem",
-            justifyContent: "space-around",
-            alignItems: "center",
-            border: { laptop: `1px solid ${theme.palette.primary.light}` },
-            borderRadius: "0.75rem",
-            mr: "0.5rem",
-          }}
-        >
-          <Typography
+        {openLoader ? (
+          <Backdrop
             sx={{
-              fontSize: { mobile: "1.5rem", laptop: "3rem" },
-              color: `${theme.palette.primary.light}`,
-              textAlign: { mobile: "unset", laptop: "center" },
+              color: theme.palette.primary.light,
+              zIndex: (theme) => theme.zIndex.drawer + 1,
             }}
-          >
-            {title}
-          </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "1rem",
-              marginLeft: { laptop: "1rem" },
-            }}
-          >
-            <Typography
-              sx={{
-                fontSize: { mobile: "1.25rem", laptop: "1.75rem" },
-                color: `${theme.palette.primary.light}`,
-              }}
-            >
-              Category: {category}
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: { mobile: "1.25rem", laptop: "1.75rem" },
-                color: `${theme.palette.primary.light}`,
-              }}
-            >
-              Rating: {rating.rate}/5 (out of {rating.count} rates)
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: { mobile: "1.25rem", laptop: "1.75rem" },
-                color: `${theme.palette.primary.light}`,
-              }}
-            >
-              Price: ${price}
-            </Typography>
-
-            <Typography
-              sx={{
-                fontSize: { mobile: "1rem", laptop: "1.5rem" },
-                color: `${theme.palette.primary.light}`,
-              }}
-            >
-              {description}.
-            </Typography>
-          </Box>
-          <Snackbar
             open={open}
-            anchorOrigin={{ vertical, horizontal }}
-            autoHideDuration={3000}
-            onClose={handleClose}
-            message="Product added"
           >
-            <Alert
-              onClose={handleClose}
-              severity="success"
-              sx={{ width: { mobile: "100%", laptop: "25%" } }}
-            >
-              Product added
-            </Alert>
-          </Snackbar>
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <Button
+            <CircularProgress
+              color="primary"
+              sx={{ color: theme.palette.primary.light }}
+            />
+          </Backdrop>
+        ) : (
+          <>
+            <Box
               sx={{
-                border: `1px solid ${theme.palette.primary.light}`,
-                backgroundColor: theme.palette.success.main,
+                position: "relative",
+                width: { mobile: "98%", laptop: "70%" },
+                height: { laptop: "800px" },
+                paddingBottom: { mobile: "160%", laptop: "0" },
+                overflow: "hidden",
                 borderRadius: "0.75rem",
-                mb: "1rem",
-                mr: "0.5rem",
-                width: { laptop: "15rem" },
+                marginLeft: { laptop: "2rem" },
+                marginTop: { laptop: "0.5rem" },
               }}
-              onClick={() =>
-                handleDispatch({
-                  vertical: "top",
-                  horizontal: "center",
-                })
-              }
+            >
+              <Image src={image} layout="fill" objectFit="cover" alt={""} />
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                width: "100%",
+                height: "90%",
+                gap: "1rem",
+                px: "0.5rem",
+                justifyContent: "space-around",
+                alignItems: "center",
+                border: { laptop: `1px solid ${theme.palette.primary.light}` },
+                borderRadius: "0.75rem",
+                mr: "0.5rem",
+              }}
             >
               <Typography
                 sx={{
-                  fontSize: "1rem",
+                  fontSize: { mobile: "1.5rem", laptop: "3rem" },
                   color: `${theme.palette.primary.light}`,
+                  textAlign: { mobile: "unset", laptop: "center" },
                 }}
               >
-                Add to cart
+                {title}
               </Typography>
-            </Button>
-          </Box>
-        </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "1rem",
+                  marginLeft: { laptop: "1rem" },
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontSize: { mobile: "1.25rem", laptop: "1.75rem" },
+                    color: `${theme.palette.primary.light}`,
+                  }}
+                >
+                  Category: {category}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: { mobile: "1.25rem", laptop: "1.75rem" },
+                    color: `${theme.palette.primary.light}`,
+                  }}
+                >
+                  Rating: {rating.rate}/5 (out of {rating.count} rates)
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: { mobile: "1.25rem", laptop: "1.75rem" },
+                    color: `${theme.palette.primary.light}`,
+                  }}
+                >
+                  Price: ${price}
+                </Typography>
+
+                <Typography
+                  sx={{
+                    fontSize: { mobile: "1rem", laptop: "1.5rem" },
+                    color: `${theme.palette.primary.light}`,
+                  }}
+                >
+                  {description}.
+                </Typography>
+              </Box>
+              <Snackbar
+                open={open}
+                anchorOrigin={{ vertical, horizontal }}
+                autoHideDuration={3000}
+                onClose={handleClose}
+                message="Product added"
+              >
+                <Alert
+                  onClose={handleClose}
+                  severity="success"
+                  sx={{ width: { mobile: "100%", laptop: "25%" } }}
+                >
+                  Product added
+                </Alert>
+              </Snackbar>
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <Button
+                  sx={{
+                    border: `1px solid ${theme.palette.primary.light}`,
+                    backgroundColor: theme.palette.success.main,
+                    borderRadius: "0.75rem",
+                    mb: "1rem",
+                    mr: "0.5rem",
+                    width: { laptop: "15rem" },
+                  }}
+                  onClick={() =>
+                    handleDispatch({
+                      vertical: "top",
+                      horizontal: "center",
+                    })
+                  }
+                >
+                  <Typography
+                    sx={{
+                      fontSize: "1rem",
+                      color: `${theme.palette.primary.light}`,
+                    }}
+                  >
+                    Add to cart
+                  </Typography>
+                </Button>
+              </Box>
+            </Box>
+          </>
+        )}
       </Box>
     </Box>
   );

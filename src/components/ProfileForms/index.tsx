@@ -125,16 +125,18 @@ export const ProfileForms = () => {
           sx={{
             backgroundColor: theme.palette.error.main,
             borderRadius: "0.75rem",
+            border: `1px solid ${theme.palette.background.default}`,
             px: "1rem",
             py: "0.75rem",
+            color: theme.palette.primary.light,
+            textTransform: "none",
+            "&:hover": {
+              color: theme.palette.background.default,
+            },
           }}
           onClick={handleLogOut}
         >
-          <Typography
-            sx={{ textTransform: "none", color: theme.palette.primary.light }}
-          >
-            Log out
-          </Typography>
+          Log out
         </Button>
 
         {!update ? (
@@ -144,14 +146,16 @@ export const ProfileForms = () => {
               borderRadius: "0.75rem",
               px: "1rem",
               py: "0.75rem",
+              border: `1px solid ${theme.palette.primary.dark}`,
+              color: theme.palette.primary.light,
+              textTransform: "none",
+              "&:hover": {
+                color: theme.palette.background.default,
+              },
             }}
             onClick={() => setUpdate((prev) => !prev)}
           >
-            <Typography
-              sx={{ textTransform: "none", color: theme.palette.primary.light }}
-            >
-              Update
-            </Typography>
+            Update
           </Button>
         ) : (
           <Button
@@ -160,14 +164,16 @@ export const ProfileForms = () => {
               borderRadius: "0.75rem",
               px: "1rem",
               py: "0.75rem",
+              border: `1px solid ${theme.palette.primary.dark}`,
+              color: theme.palette.primary.light,
+              textTransform: "none",
+              "&:hover": {
+                color: theme.palette.background.default,
+              },
             }}
             onClick={handleUpdate}
           >
-            <Typography
-              sx={{ textTransform: "none", color: theme.palette.primary.light }}
-            >
-              Confirm
-            </Typography>
+            Confirm
           </Button>
         )}
       </Box>
