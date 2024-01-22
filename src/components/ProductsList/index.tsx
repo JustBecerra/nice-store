@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Backdrop, Box, CircularProgress } from "@mui/material";
 import { Product } from "../Product";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { useDispatch } from "react-redux";
@@ -8,12 +8,22 @@ import { ProductType } from "@/redux/features/types";
 
 export const ProductsList = ({ productName }: { productName: string }) => {
   const [filteredProducts, setFilteredProducts] = useState<ProductType[]>([]);
+  const [open, setOpen] = useState(false);
   const products = useAppSelector((state) => state.productReducer.products);
+  const status = useAppSelector((state) => state.productReducer.status);
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (status === "loading") {
+      setOpen(true);
+    } else {
+      setOpen(false);
+    }
+  }, [status]);
 
   useEffect(() => {
     setFilteredProducts(
@@ -39,15 +49,24 @@ export const ProductsList = ({ productName }: { productName: string }) => {
         mb: "1.5rem",
       }}
     >
-      {filteredProducts.map((item) => (
-        <Product
-          key={item.id}
-          title={item.title}
-          price={item.price}
-          id={item.id}
-          image={item.image}
-        />
-      ))}
+      {open ? (
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={open}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      ) : (
+        filteredProducts.map((item) => (
+          <Product
+            key={item.id}
+            title={item.title}
+            price={item.price}
+            id={item.id}
+            image={item.image}
+          />
+        ))
+      )}
     </Box>
   );
 };

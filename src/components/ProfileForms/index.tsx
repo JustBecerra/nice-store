@@ -7,7 +7,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { signOut, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { theme } from "../../../utils/theme";
