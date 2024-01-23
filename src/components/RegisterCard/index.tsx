@@ -1,10 +1,16 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import React, { FormEvent } from "react";
+import React, { FormEvent, useState } from "react";
 import { theme } from "../../../utils/theme";
 import axios from "axios";
 
 export const RegisterCard = () => {
-  // const [];
+  const [registerForm, setRegisterForm] = useState({
+    email: "",
+    fullname: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [isFormEmpty, setIsFormEmpty] = useState(true);
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -20,6 +26,16 @@ export const RegisterCard = () => {
       // Handle errors
       console.error("Error during registration:", error);
     }
+  };
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setRegisterForm((prev) => ({ ...prev, [name]: value }));
+    const fieldsAreEmpty = Object.values({
+      ...registerForm,
+      [name]: value,
+    }).every((val) => val === "");
+    setIsFormEmpty(fieldsAreEmpty);
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -45,6 +61,7 @@ export const RegisterCard = () => {
         <TextField
           label="Email"
           name="email"
+          onChange={handleChange}
           sx={{
             width: { laptop: "50%" },
             "& .MuiInputLabel-root": {
@@ -67,6 +84,7 @@ export const RegisterCard = () => {
         <TextField
           label="Full Name"
           name="fullname"
+          onChange={handleChange}
           sx={{
             width: { laptop: "50%" },
             "& .MuiInputLabel-root": {
@@ -92,6 +110,7 @@ export const RegisterCard = () => {
         <TextField
           label="Password"
           name="password"
+          onChange={handleChange}
           sx={{
             width: { laptop: "50%" },
             "& .MuiInputLabel-root": {
@@ -113,6 +132,7 @@ export const RegisterCard = () => {
         />
         <TextField
           label="Confirm Password"
+          onChange={handleChange}
           sx={{
             width: { laptop: "50%" },
             "& .MuiInputLabel-root": {
@@ -140,14 +160,13 @@ export const RegisterCard = () => {
             width: { mobile: "65%", laptop: "35%" },
             border: `1px solid ${theme.palette.primary.light}`,
             borderRadius: "0.75rem",
+            textTransform: "none",
+            color: theme.palette.primary.light,
           }}
+          disabled={isFormEmpty}
           type="submit"
         >
-          <Typography
-            sx={{ textTransform: "none", color: theme.palette.primary.light }}
-          >
-            Sign Up
-          </Typography>
+          Sign Up
         </Button>
       </Box>
     </form>
