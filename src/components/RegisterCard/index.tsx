@@ -2,9 +2,9 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { FormEvent } from "react";
 import { theme } from "../../../utils/theme";
 import axios from "axios";
-import { redirect } from "next/navigation";
 
 export const RegisterCard = () => {
+  // const [];
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -13,6 +13,8 @@ export const RegisterCard = () => {
         email: formData.get("email"),
         fullname: formData.get("fullname"),
         password: formData.get("password"),
+        redirect: true,
+        callbackUrl: "/authentication?name=signin",
       });
     } catch (error) {
       // Handle errors
