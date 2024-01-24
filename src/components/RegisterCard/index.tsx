@@ -1,44 +1,72 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import React, { FormEvent, useState } from "react";
 import { theme } from "../../../utils/theme";
 import axios from "axios";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+interface IFormInput {
+  email: string;
+  fullname: string;
+  password: string;
+  confirmPassword: string;
+}
+
+const schema = yup.object().shape({
+  email: yup.string().email("Invalid email").required("Email is required"),
+  fullname: yup.string().required("Full Name is required"),
+  password: yup
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .required("Password is required"),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password")], "Passwords must match")
+    .required("Confirm Password is required"),
+});
 
 export const RegisterCard = () => {
-  const [registerForm, setRegisterForm] = useState({
-    email: "",
-    fullname: "",
-    password: "",
-    confirmPassword: "",
+  const { control, handleSubmit } = useForm<IFormInput>({
+    defaultValues: {
+      email: "",
+      fullname: "",
+      password: "",
+      confirmPassword: "",
+    },
+    resolver: yupResolver(schema),
   });
-  const [isFormEmpty, setIsFormEmpty] = useState(true);
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+
+  // const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   try {
+  //     const formData = new FormData(e.currentTarget);
+  //     await axios.post("api/auth/register", {
+  //       email: formData.get("email"),
+  //       fullname: formData.get("fullname"),
+  //       password: formData.get("password"),
+  //       redirect: true,
+  //       callbackUrl: "/authentication?name=signin",
+  //     });
+  //   } catch (error) {
+  //     console.error("Error during registration:", error);
+  //   }
+  // };
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
-      const formData = new FormData(e.currentTarget);
-      await axios.post("api/auth/register", {
-        email: formData.get("email"),
-        fullname: formData.get("fullname"),
-        password: formData.get("password"),
-        redirect: true,
-        callbackUrl: "/authentication?name=signin",
-      });
+      const formData = new FormData();
+      formData.append("email", data.email);
+      formData.append("fullname", data.fullname);
+      formData.append("password", data.password);
+      formData.append("redirect", "true");
+      formData.append("callbackUrl", "/authentication?name=signin");
+
+      await axios.post("api/auth/register", formData);
     } catch (error) {
-      // Handle errors
       console.error("Error during registration:", error);
     }
   };
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setRegisterForm((prev) => ({ ...prev, [name]: value }));
-    const fieldsAreEmpty = Object.values({
-      ...registerForm,
-      [name]: value,
-    }).every((val) => val === "");
-    setIsFormEmpty(fieldsAreEmpty);
-  };
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Box
         sx={{
           display: "flex",
@@ -58,102 +86,145 @@ export const RegisterCard = () => {
           Sign Up to Nice Store
         </Typography>
 
-        <TextField
-          label="Email"
+        <Controller
           name="email"
-          onChange={handleChange}
-          sx={{
-            width: { laptop: "50%" },
-            "& .MuiInputLabel-root": {
-              color: theme.palette.primary.light,
-            },
-            "& .MuiInput-root": {
-              color: theme.palette.primary.light,
-            },
-            "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
-              borderColor: theme.palette.primary.light,
-            },
-            "& .MuiOutlinedInput-notchedOutline": {
-              borderColor: theme.palette.primary.light,
-            },
-            "& .MuiInputBase-input": {
-              color: theme.palette.primary.light,
-            },
+          control={control}
+          rules={{
+            required: true,
+            pattern:
+              /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
           }}
+          render={({ field, fieldState }) => (
+            <TextField
+              label="Email"
+              sx={{
+                width: { laptop: "50%" },
+                "& .MuiInputLabel-root": {
+                  color: theme.palette.primary.light,
+                },
+                "& .MuiInput-root": {
+                  color: theme.palette.primary.light,
+                },
+                "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":
+                  {
+                    borderColor: theme.palette.primary.light,
+                  },
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: theme.palette.primary.light,
+                },
+                "& .MuiFilledInput": {
+                  color: theme.palette.primary.light,
+                },
+                "& .MuiInputBase-input": {
+                  color: theme.palette.primary.light,
+                },
+              }}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message || ""}
+              {...field}
+            />
+          )}
         />
-        <TextField
-          label="Full Name"
+
+        <Controller
           name="fullname"
-          onChange={handleChange}
-          sx={{
-            width: { laptop: "50%" },
-            "& .MuiInputLabel-root": {
-              color: theme.palette.primary.light,
-            },
-            "& .MuiInput-root": {
-              color: theme.palette.primary.light,
-            },
-            "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
-              borderColor: theme.palette.primary.light,
-            },
-            "& .MuiOutlinedInput-notchedOutline": {
-              borderColor: theme.palette.primary.light,
-            },
-            "& .MuiFilledInput": {
-              color: theme.palette.primary.light,
-            },
-            "& .MuiInputBase-input": {
-              color: theme.palette.primary.light,
-            },
-          }}
+          control={control}
+          rules={{ required: true, pattern: /^[A-Za-z]+$/i }}
+          render={({ field, fieldState }) => (
+            <TextField
+              label="Full Name"
+              sx={{
+                width: { laptop: "50%" },
+                "& .MuiInputLabel-root": {
+                  color: theme.palette.primary.light,
+                },
+                "& .MuiInput-root": {
+                  color: theme.palette.primary.light,
+                },
+                "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":
+                  {
+                    borderColor: theme.palette.primary.light,
+                  },
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: theme.palette.primary.light,
+                },
+                "& .MuiFilledInput": {
+                  color: theme.palette.primary.light,
+                },
+                "& .MuiInputBase-input": {
+                  color: theme.palette.primary.light,
+                },
+              }}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message || ""}
+              {...field}
+            />
+          )}
         />
-        <TextField
-          label="Password"
+
+        <Controller
           name="password"
-          onChange={handleChange}
-          sx={{
-            width: { laptop: "50%" },
-            "& .MuiInputLabel-root": {
-              color: theme.palette.primary.light,
-            },
-            "& .MuiInput-root": {
-              color: theme.palette.primary.light,
-            },
-            "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
-              borderColor: theme.palette.primary.light,
-            },
-            "& .MuiOutlinedInput-notchedOutline": {
-              borderColor: theme.palette.primary.light,
-            },
-            "& .MuiInputBase-input": {
-              color: theme.palette.primary.light,
-            },
-          }}
+          control={control}
+          rules={{ required: true, min: 8 }}
+          render={({ field, fieldState }) => (
+            <TextField
+              label="Password"
+              sx={{
+                width: { laptop: "50%" },
+                "& .MuiInputLabel-root": {
+                  color: theme.palette.primary.light,
+                },
+                "& .MuiInput-root": {
+                  color: theme.palette.primary.light,
+                },
+                "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":
+                  {
+                    borderColor: theme.palette.primary.light,
+                  },
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: theme.palette.primary.light,
+                },
+                "& .MuiInputBase-input": {
+                  color: theme.palette.primary.light,
+                },
+              }}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message || ""}
+              {...field}
+            />
+          )}
         />
-        <TextField
-          label="Confirm Password"
-          onChange={handleChange}
-          sx={{
-            width: { laptop: "50%" },
-            "& .MuiInputLabel-root": {
-              color: theme.palette.primary.light,
-            },
-            "& .MuiInput-root": {
-              color: theme.palette.primary.light,
-            },
-            "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
-              borderColor: theme.palette.primary.light,
-            },
-            "& .MuiOutlinedInput-notchedOutline": {
-              borderColor: theme.palette.primary.light,
-            },
-            "& .MuiFilledInput": {
-              color: theme.palette.primary.light,
-            },
-            "& .MuiInputBase-input": {
-              color: theme.palette.primary.light,
-            },
-          }}
+        <Controller
+          name="confirmPassword"
+          control={control}
+          rules={{ required: true, min: 8 }}
+          render={({ field, fieldState }) => (
+            <TextField
+              label="Confirm Password"
+              sx={{
+                width: { laptop: "50%" },
+                "& .MuiInputLabel-root": {
+                  color: theme.palette.primary.light,
+                },
+                "& .MuiInput-root": {
+                  color: theme.palette.primary.light,
+                },
+                "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":
+                  {
+                    borderColor: theme.palette.primary.light,
+                  },
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: theme.palette.primary.light,
+                },
+                "& .MuiInputBase-input": {
+                  color: theme.palette.primary.light,
+                },
+              }}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message || ""}
+              {...field}
+            />
+          )}
         />
         <Button
           sx={{
@@ -163,7 +234,6 @@ export const RegisterCard = () => {
             textTransform: "none",
             color: theme.palette.primary.light,
           }}
-          disabled={isFormEmpty}
           type="submit"
         >
           Sign Up
