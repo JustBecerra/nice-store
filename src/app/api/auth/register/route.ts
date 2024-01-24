@@ -13,6 +13,7 @@ export async function POST(request: Request) {
     console.log({ email, password });
   } catch (e) {
     console.log({ e });
+    return NextResponse.json({ message: "error" }).status;
   }
   return NextResponse.json({ message: "success" });
 }

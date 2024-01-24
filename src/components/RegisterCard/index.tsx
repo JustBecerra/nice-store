@@ -169,6 +169,7 @@ export const RegisterCard = () => {
           render={({ field, fieldState }) => (
             <TextField
               label="Password"
+              type="password"
               sx={{
                 width: { laptop: "50%" },
                 "& .MuiInputLabel-root": {
@@ -201,6 +202,7 @@ export const RegisterCard = () => {
           render={({ field, fieldState }) => (
             <TextField
               label="Confirm Password"
+              type="password"
               sx={{
                 width: { laptop: "50%" },
                 "& .MuiInputLabel-root": {
