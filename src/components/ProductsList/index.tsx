@@ -1,4 +1,4 @@
-import { Backdrop, Box, CircularProgress } from "@mui/material";
+import { Backdrop, Box, CircularProgress, Typography } from "@mui/material";
 import { Product } from "../Product";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { useDispatch } from "react-redux";
@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { fetchProducts } from "@/redux/features/product-slice";
 import { ProductType } from "@/redux/features/types";
 import { theme } from "../../../utils/theme";
-
+import StorefrontIcon from "@mui/icons-material/Storefront";
 export const ProductsList = ({ productName }: { productName: string }) => {
   const [filteredProducts, setFilteredProducts] = useState<ProductType[]>([]);
   const [open, setOpen] = useState(false);
@@ -45,12 +45,13 @@ export const ProductsList = ({ productName }: { productName: string }) => {
         },
         flexWrap: { laptop: "wrap" },
         width: "100vw",
+        height: "100vh",
         gap: "2rem",
         mt: "5rem",
         mb: "1.5rem",
       }}
     >
-      {open ? (
+      {open && (
         <Backdrop
           sx={{
             color: theme.palette.primary.light,
@@ -60,7 +61,8 @@ export const ProductsList = ({ productName }: { productName: string }) => {
         >
           <CircularProgress color="inherit" />
         </Backdrop>
-      ) : (
+      )}{" "}
+      {filteredProducts.length > 0 ? (
         filteredProducts.map((item) => (
           <Product
             key={item.id}
@@ -70,6 +72,28 @@ export const ProductsList = ({ productName }: { productName: string }) => {
             image={item.image}
           />
         ))
+      ) : (
+        <Box
+          sx={{
+            m: "auto",
+            width: { mobile: "60%", laptop: "20%" },
+            p: "1rem",
+            backgroundColor: theme.palette.background.default,
+            borderRadius: "0.75rem",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "0.75rem",
+          }}
+        >
+          <Typography
+            sx={{ color: theme.palette.primary.light, textAlign: "center" }}
+          >
+            Looks like we don&apos;t have that! <br />
+            try entering something else.
+          </Typography>
+          <StorefrontIcon sx={{ color: theme.palette.primary.light }} />
+        </Box>
       )}
     </Box>
   );
