@@ -11,6 +11,7 @@ import { signOut, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { theme } from "../../../utils/theme";
 import { useState } from "react";
+import FileUploadIcon from "@mui/icons-material/FileUpload";
 
 export const ProfileForms = () => {
   const { data: session } = useSession();
@@ -67,7 +68,7 @@ export const ProfileForms = () => {
         <>
           <Typography>{name || session!.user?.name}</Typography>
           <Typography>{email || session!.user?.email}</Typography>
-          <Typography>{address || "address"}</Typography>
+          <Typography>{address || "no address defined"}</Typography>
         </>
       ) : (
         <Box
@@ -82,13 +83,32 @@ export const ProfileForms = () => {
         >
           <FormControl>
             {update && (
-              <Input
-                type="file"
-                onChange={handleImageChange}
-                onClick={(e: React.MouseEvent<HTMLInputElement>) =>
-                  e.stopPropagation()
-                }
-              />
+              <Button
+                component="label"
+                variant="contained"
+                startIcon={<FileUploadIcon />}
+                sx={{ textTransform: "none" }}
+              >
+                Change photo
+                <Input
+                  sx={{
+                    clip: "rect(0 0 0 0)",
+                    clipPath: "inset(50%)",
+                    height: 1,
+                    overflow: "hidden",
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    whiteSpace: "nowrap",
+                    width: 1,
+                  }}
+                  type="file"
+                  onChange={handleImageChange}
+                  onClick={(e: React.MouseEvent<HTMLInputElement>) =>
+                    e.stopPropagation()
+                  }
+                />
+              </Button>
             )}
           </FormControl>
           <FormControl>
