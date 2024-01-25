@@ -25,6 +25,9 @@ export const LoginCard = () => {
     },
     resolver: yupResolver(schema),
   });
+  const handleGoogleSignIn = () => {
+    signIn("google", { callbackUrl: "http://localhost:3000" });
+  };
   const onSubmit: SubmitHandler<LoginFormInput> = async (data) => {
     try {
       const signInOptions = {
@@ -146,6 +149,24 @@ export const LoginCard = () => {
             sx={{ textTransform: "none", color: theme.palette.primary.light }}
           >
             Sign In
+          </Typography>
+        </Button>
+        <Button
+          sx={{
+            width: { mobile: "65%", laptop: "35%" },
+            border: `1px solid ${theme.palette.primary.light}`,
+            borderRadius: "0.75rem",
+            ml: "0 !important",
+          }}
+          onClick={handleGoogleSignIn}
+        >
+          <Typography
+            sx={{
+              textTransform: "none",
+              color: theme.palette.primary.light,
+            }}
+          >
+            Sign In with Google
           </Typography>
         </Button>
       </Box>
