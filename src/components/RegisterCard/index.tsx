@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 interface IFormInput {
   email: string;
   fullname: string;
+  address: string;
   password: string;
   confirmPassword: string;
 }
@@ -14,6 +15,7 @@ interface IFormInput {
 const schema = yup.object().shape({
   email: yup.string().email("Invalid email").required("Email is required"),
   fullname: yup.string().required("Full Name is required"),
+  address: yup.string().required("an address is required"),
   password: yup
     .string()
     .min(8, "Password must be at least 8 characters")
@@ -29,32 +31,19 @@ export const RegisterCard = () => {
     defaultValues: {
       email: "",
       fullname: "",
+      address: "",
       password: "",
       confirmPassword: "",
     },
     resolver: yupResolver(schema),
   });
 
-  // const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   try {
-  //     const formData = new FormData(e.currentTarget);
-  //     await axios.post("api/auth/register", {
-  //       email: formData.get("email"),
-  //       fullname: formData.get("fullname"),
-  //       password: formData.get("password"),
-  //       redirect: true,
-  //       callbackUrl: "/authentication?name=signin",
-  //     });
-  //   } catch (error) {
-  //     console.error("Error during registration:", error);
-  //   }
-  // };
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
       const formData = new FormData();
       formData.append("email", data.email);
       formData.append("fullname", data.fullname);
+      formData.append("address", data.address);
       formData.append("password", data.password);
       formData.append("redirect", "true");
       formData.append("callbackUrl", "/authentication?name=signin");
@@ -133,6 +122,42 @@ export const RegisterCard = () => {
           render={({ field, fieldState }) => (
             <TextField
               label="Full Name"
+              sx={{
+                width: { laptop: "50%" },
+                "& .MuiInputLabel-root": {
+                  color: theme.palette.primary.light,
+                },
+                "& .MuiInput-root": {
+                  color: theme.palette.primary.light,
+                },
+                "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline":
+                  {
+                    borderColor: theme.palette.primary.light,
+                  },
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: theme.palette.primary.light,
+                },
+                "& .MuiFilledInput": {
+                  color: theme.palette.primary.light,
+                },
+                "& .MuiInputBase-input": {
+                  color: theme.palette.primary.light,
+                },
+              }}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message || ""}
+              {...field}
+            />
+          )}
+        />
+
+        <Controller
+          name="address"
+          control={control}
+          rules={{ required: true, pattern: /^[A-Za-z]+$/i }}
+          render={({ field, fieldState }) => (
+            <TextField
+              label="Address"
               sx={{
                 width: { laptop: "50%" },
                 "& .MuiInputLabel-root": {
