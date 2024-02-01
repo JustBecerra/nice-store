@@ -17,7 +17,7 @@ import Image from "next/image";
 import { theme } from "../../../utils/theme";
 import { BackArrow } from "../BackArrow";
 import { useDispatch } from "react-redux";
-import { addProducts } from "@/redux/features/product-slice";
+import { addProducts } from "@/redux/features/product/product-slice";
 import { useAppSelector } from "@/redux/store";
 
 interface props {

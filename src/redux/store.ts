@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 // Or from '@reduxjs/toolkit/query/react'
 import { setupListeners } from "@reduxjs/toolkit/query";
-import productReducer from "./features/product-slice";
+import productReducer from "./features/product/product-slice";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 export const store = configureStore({
   reducer: {

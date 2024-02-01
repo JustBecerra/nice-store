@@ -19,7 +19,8 @@ export const ProfileForms = () => {
   const [update, setUpdate] = useState(session ? false : true);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [address, setaddress] = useState("");
+  const [address, setAddress] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogOut = () => {
     signOut({ callbackUrl: "http://localhost:3000" });
@@ -33,7 +34,7 @@ export const ProfileForms = () => {
   };
 
   const handleUpdate = () => {
-    const dataObject = { name, email, address, selectedImage };
+    const dataObject = { name, email, address, password, selectedImage };
     sessionStorage.setItem("userData", JSON.stringify(dataObject));
     setUpdate((prev) => !prev);
   };
@@ -120,15 +121,20 @@ export const ProfileForms = () => {
           </FormControl>
           <FormControl>
             <TextField
+              label="Address"
+              onChange={(e) => handleInputChange(e, setAddress)}
+            />
+          </FormControl>
+          <FormControl>
+            <TextField
               label="Email"
               onChange={(e) => handleInputChange(e, setEmail)}
             />
           </FormControl>
           <FormControl>
             <TextField
-              label="Address"
-              sx={{ mb: "1rem" }}
-              onChange={(e) => handleInputChange(e, setaddress)}
+              label="Password"
+              onChange={(e) => handleInputChange(e, setPassword)}
             />
           </FormControl>
         </Box>

@@ -3,7 +3,7 @@ import { Product } from "../Product";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { fetchProducts } from "@/redux/features/product-slice";
+import { fetchProducts } from "@/redux/features/product/product-slice";
 import { ProductType } from "@/redux/features/types";
 import { theme } from "../../../utils/theme";
 import StorefrontIcon from "@mui/icons-material/Storefront";

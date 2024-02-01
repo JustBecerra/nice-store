@@ -1,6 +1,6 @@
 "use client";
 import { ProductDetail } from "@/components/ProductDetail";
-import { fetchProduct } from "@/redux/features/product-slice";
+import { fetchProduct } from "@/redux/features/product/product-slice";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";

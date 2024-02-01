@@ -5,7 +5,10 @@ import { theme } from "../../../utils/theme";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import { ProductType } from "@/redux/features/types";
-import { addProducts, removeProduct } from "@/redux/features/product-slice";
+import {
+  addProducts,
+  removeProduct,
+} from "@/redux/features/product/product-slice";
 import { useDispatch } from "react-redux";
 export const CartItem = ({
   product,
