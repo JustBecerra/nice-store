@@ -7,6 +7,21 @@ const handler = NextAuth({
   session: {
     strategy: "jwt",
   },
+  callbacks: {
+    async session({ session, token }) {
+      // Send properties to the client, like an access_token and user id from a provider.
+      session.user.id = token.id as number;
+
+      return session;
+    },
+    jwt({ token, trigger, session }) {
+      if (trigger === "update" && session?.name) {
+        // Note, that `session` can be any arbitrary object, remember to validate it!
+        token.name = session.name;
+      }
+      return token;
+    },
+  },
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -36,7 +51,9 @@ const handler = NextAuth({
         if (passwordCorrect) {
           return {
             id: user.id,
+            image: user.image,
             email: user.email,
+            name: user.name,
           };
         }
 

@@ -1,6 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { ProductType } from "../types";
 
 type UserType = {
   ID: number;
@@ -28,8 +27,8 @@ const initialState: initialStateType = {
   error: "",
 } as initialStateType;
 
-const modifyUser = createAsyncThunk("products", async () => {
-  const response = await axios.get("http://127.0.0.1:8080/products");
+const modifyUser = createAsyncThunk("user", async (userData: UserType) => {
+  const response = await axios.put("http://127.0.0.1:8080/user", userData);
   return response.data;
 });
 
